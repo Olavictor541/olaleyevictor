@@ -35,7 +35,7 @@ git remote add origin https://github.com/Olavictor541/portfolioRebuild.git
 git add .
 
 # Create your first commit
-git commit -m "Initial commit – add portfolio files"
+git commit -m "Initial commit - add portfolio files"
 
 # Push your files to GitHub (main branch)
 git push -u origin main
