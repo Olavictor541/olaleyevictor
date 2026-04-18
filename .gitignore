@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Node / npm
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
