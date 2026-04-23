@@ -107,8 +107,8 @@ export function Home() {
             style={{ bottom: "5%", left: "14%", transform: "rotate(-15deg)", width: "140px", height: "140px" }}
           >
             <img src="/uI.png" alt="ui" className="w-12 h-12 mb-1" />
-            <div className="text-[9px] font-bold text-center">INTERACTIVE</div>
-            <div className="text-[8px] text-center">Motion & UX</div>
+            <div className="text-[9px] font-bold text-center">Systems</div>
+            <div className="text-[8px] text-center">Design</div>
           </div>
 
           {/* Badge 5: Leadership - Stamp circle with grade image */}
