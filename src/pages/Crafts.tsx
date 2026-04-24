@@ -67,7 +67,7 @@ export function Crafts() {
             >
               {/* Image Container */}
               <div className={`relative bg-gray-900 overflow-hidden ${
-                artwork.size === "large" ? "h-[260px] md:h-[480px]" : "h-[260px] md:h-[320px]"
+                artwork.size === "large" ? "h-[260px] md:h-[480px]" : "h-[350px] md:h-[320px]"
               }`}>
                 <img
                   src={artwork.image}
