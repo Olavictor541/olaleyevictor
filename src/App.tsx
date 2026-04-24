@@ -1,13 +1,24 @@
-import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import YourComponent from './YourComponent';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Contact } from "./pages/Contact.tsx";
+import { Crafts } from "./pages/Crafts.tsx";
+import { About } from "./pages/About.tsx";
+ 
+import MenuBar from "./components/MenuBar";
+import Home from "./pages/Home.tsx";
+import './App.css'
 
-const App = () => {
+function App() {
   return (
     <BrowserRouter basename="/portfolioRebuild">
-      <YourComponent />
+      <MenuBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/crafts" element={<Crafts />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </BrowserRouter>
   );
-};
+}
 
-export default App;
+export default App
