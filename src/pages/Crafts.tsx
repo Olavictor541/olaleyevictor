@@ -66,13 +66,11 @@ export function Crafts() {
               }`}
             >
               {/* Image Container */}
-              <div className={`relative bg-gray-900 overflow-hidden ${
-                artwork.size === "large" ? "h-[260px] md:h-[480px]" : "h-[350px] md:h-[320px]"
-              }`}>
+              <div className="relative bg-gray-900 overflow-hidden aspect-video md:aspect-auto">
                 <img
                   src={artwork.image}
                   alt={artwork.title}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
 
                 {/* Overlay on Hover */}

@@ -147,7 +147,7 @@ export function About() {
             SKILLS & EXPERTISE
           </h2>
 
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-6">
             {skillsData.map((skill, index) => (
               <SkillCard key={index} icon={skill.icon} title={skill.title} />
             ))}
