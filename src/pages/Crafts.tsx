@@ -5,42 +5,42 @@ export function Crafts() {
       id: 1,
       title: "Mindless #1",
       artist: "Victor Olaleye",
-      image: "/m3.webp",
+      image: "/portfolioRebuild/m3.webp",
       size: "large"
     },
     {
       id: 2,
       title: "Transformation: A far above mentality",
       artist: "Victor Olaleye",
-      image: "/m2.webp",
+      image: "/portfolioRebuild/m2.webp",
       size: "small"
     },
     {
       id: 3,
       title: "The Mind of Christ: A superior belief system",
       artist: "Victor Olaleye",
-      image: "/m4.webp",
+      image: "/portfolioRebuild/m4.webp",
       size: "small"
     },
     {
       id: 4,
       title: "The Seeing Eyes",
       artist: "Victor Olaleye",
-      image: "/m6.webp",
+      image: "/portfolioRebuild/m6.webp",
       size: "large"
     },
     {
       id: 5,
       title: "Elevation: A higher calling #1",
       artist: "Victor Olaleye",
-      image: "/m5.webp",
+      image: "/portfolioRebuild/m5.webp",
       size: "small"
     },
     {
       id: 6,
       title: "Untitled",
       artist: "Victor Olaleye",
-      image: "/m7.webp",
+      image: "/portfolioRebuild/m7.webp",
       size: "small"
     },
   ];

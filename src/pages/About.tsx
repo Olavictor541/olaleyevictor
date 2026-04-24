@@ -131,7 +131,7 @@ export function About() {
                 }}
               >
                 <img
-                  src="/aboutPics.webp"
+                  src="/portfolioRebuild/aboutPics.webp"
                   alt="Victor"
                   className="absolute inset-0 w-full h-full object-cover object-center"
                   style={{ objectPosition: "center"}}
