@@ -74,8 +74,8 @@ export function Crafts() {
                 />
 
                 {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-end">
-                  <div className="w-full p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute inset-0 bg-black/35 md:bg-black md:bg-opacity-0 md:group-hover:bg-opacity-40 transition-all duration-300 flex items-end">
+                  <div className="w-full p-4 md:p-6 translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-300">
                     <h3 className="text-lg md:text-xl font-bold mb-1">{artwork.title}</h3>
                     <p className="text-sm text-gray-300">{artwork.artist}</p>
                   </div>

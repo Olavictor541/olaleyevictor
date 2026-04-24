@@ -90,7 +90,7 @@ export function About() {
       <div className="max-w-7xl mx-auto px-4">
         {/* ABOUT ME SECTION */}
         <div className="mb-20">
-          <h1 className="text-5xl md:text-7xl font-black text-orange-200 mb-8 md:mb-12 tracking-wide">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-orange-200 mb-8 md:mb-12 tracking-wide">
             ABOUT ME
           </h1>
 
@@ -111,11 +111,11 @@ export function About() {
             </div>
 
             {/* Right column - Rotated image with grid pattern background */}
-            <div className="flex justify-center relative h-80 md:h-[500px]">
+            <div className="flex justify-center relative h-80 sm:h-[420px] md:h-[500px]">
 
               {/* Background container with grid pattern for image */}
               <div
-                className="absolute bottom-0  z-10 flex items-center justify-center"
+                className="absolute bottom-0 z-10 flex items-center justify-center rounded-[120px] md:rounded-[200px]"
                 style={{
                   width: "90%",
                   maxWidth: "500px",
@@ -126,7 +126,6 @@ export function About() {
                   `,
                   backgroundSize: "70px 70px",
                   backgroundColor: "#ffe5b0",
-                  borderRadius: "200px",
                   overflow: "hidden",
                 }}
               >
@@ -143,11 +142,11 @@ export function About() {
 
         {/* SKILLS & EXPERTISE SECTION */}
         <div className="mb-20 ">
-          <h2 className="text-5xl md:text-7xl font-black mb-12 tracking-wide">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-10 md:mb-12 tracking-wide">
             SKILLS & EXPERTISE
           </h2>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {skillsData.map((skill, index) => (
               <SkillCard key={index} icon={skill.icon} title={skill.title} />
             ))}
@@ -156,7 +155,7 @@ export function About() {
 
         {/* EXPERIENCE SECTION */}
         <div>
-          <h2 className="text-5xl md:text-7xl font-black mb-12 tracking-wide">
+          <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-10 md:mb-12 tracking-wide">
             EXPERIENCE
           </h2>
 

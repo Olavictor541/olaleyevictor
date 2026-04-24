@@ -9,8 +9,7 @@ export function Home() {
         {/* Hero Section */}
         <div className="text-center mb-8 md:mb-12">
           <h1
-            className="text-4xl sm:text-6xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide"
-            style={{ transform: "scaleY(1.9) scaleX(1.5)" }}
+            className="text-3xl sm:text-5xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide [transform:scaleY(1.35)_scaleX(1.05)] sm:[transform:scaleY(1.55)_scaleX(1.18)] md:[transform:scaleY(1.9)_scaleX(1.5)]"
           >
             CREATIVE TECHNOLOGIST
           </h1>
@@ -22,11 +21,11 @@ export function Home() {
           <div>
             <p className="text-gray-300 text-base md:text-sm">
               Orchestrating digital systems at the intersection of Computer
-              Science and <br />
+              Science and <br className="hidden md:block" />
               Applied Research. I specialize in bridging the technical gap
-              between complex <br />
+              between complex <br className="hidden md:block" />
               backend logic and high-fidelity frontend experiences, ensuring
-              every interaction <br />
+              every interaction <br className="hidden md:block" />
               is grounded in data and structural integrity.
             </p>
           </div>
@@ -54,9 +53,9 @@ export function Home() {
 
         {/* Curved section with grid pattern */}
         <div
-          className="mt-12 md:mt-16 mb-12 md:mb-16 lg:mb-20 p-8 md:p-12 w-full md:h-[500px] relative overflow-hidden"
+          className="mt-12 md:mt-16 mb-12 md:mb-16 lg:mb-20 p-6 sm:p-8 md:p-12 w-full h-[360px] sm:h-[420px] md:h-[500px] relative overflow-hidden"
           style={{
-            borderRadius: "0 160px 160px 0",
+            borderRadius: "0 64px 64px 0",
             backgroundImage: `
               linear-gradient(0deg, #676464 1px, transparent 1px),
               linear-gradient(90deg, #676464 1px, transparent 1px)
@@ -68,13 +67,13 @@ export function Home() {
           <img
             src="/olaleyevictor/myPics.webp"
             alt="Hero"
-            className="absolute inset-0 w-full h-full object-contain "
+            className="absolute inset-0 w-full h-full object-cover md:object-contain"
             style={{ objectPosition: "center" }}
           />
 
           {/* Badge 1: Full-Stack Dev - Rectangle with git image */}
           <div
-            className="absolute p-3 bg-orange-400 text-black rounded-lg z-10 flex flex-col items-center justify-center"
+            className="absolute p-3 bg-orange-400 text-black rounded-lg z-10 hidden md:flex flex-col items-center justify-center"
             style={{ top: "15%", left: "20%", transform: "rotate(-12deg)", width: "140px", height: "140px" }}
           >
             <img src="/olaleyevictor/fullStack.png" alt="git" className="w-12 h-12 mb-2" />
@@ -84,7 +83,7 @@ export function Home() {
 
           {/* Badge 2: Security - Circle with security image */}
           <div
-            className="absolute w-32 h-32 rounded-full bg-red-500 flex flex-col items-center justify-center z-10"
+            className="absolute w-32 h-32 rounded-full bg-red-500 hidden md:flex flex-col items-center justify-center z-10"
             style={{ top: "8%", right: "14%", transform: "rotate(8deg)", width: "140px", height: "140px" }}
           >
             <img src="/olaleyevictor/security.png" alt="security" className="w-14 h-14 mb-1" />
@@ -93,7 +92,7 @@ export function Home() {
 
           {/* Badge 3: Visual Branding - Slanted badge with react image */}
           <div
-            className="absolute p-3 bg-yellow-400 text-black rounded z-10 flex flex-col items-center justify-center"
+            className="absolute p-3 bg-yellow-400 text-black rounded z-10 hidden md:flex flex-col items-center justify-center"
             style={{ top: "38%", left: "6%", transform: "rotate(18deg)", width: "130px", height: "130px" }}
           >
             <img src="/olaleyevictor/story.png" alt="story" className="w-10 h-10 mb-1" />
@@ -103,7 +102,7 @@ export function Home() {
 
           {/* Badge 4: Creative Coding - Pill shape with gitHub image */}
           <div
-            className="absolute px-4 py-3 bg-purple-500 text-black rounded-full z-10 flex flex-col items-center justify-center"
+            className="absolute px-4 py-3 bg-purple-500 text-black rounded-full z-10 hidden md:flex flex-col items-center justify-center"
             style={{ bottom: "5%", left: "14%", transform: "rotate(-15deg)", width: "140px", height: "140px" }}
           >
             <img src="/olaleyevictor/uI.png" alt="ui" className="w-12 h-12 mb-1" />
@@ -113,7 +112,7 @@ export function Home() {
 
           {/* Badge 5: Leadership - Stamp circle with grade image */}
           <div
-            className="absolute px-4 py-3 rounded-full bg-lime-400 text-black flex flex-col items-center justify-center z-10"
+            className="absolute px-4 py-3 rounded-full bg-lime-400 text-black hidden md:flex flex-col items-center justify-center z-10"
             style={{ bottom: "5%", right: "20%", transform: "rotate(-15deg)", width: "140px", height: "140px" }}
           >
             <img src="/olaleyevictor/code.png" alt="code" className="w-12 h-12 mb-1" />
@@ -123,12 +122,40 @@ export function Home() {
 
           {/* Badge 6: Research - Square with git image */}
           <div
-            className="absolute p-3 bg-teal-500 text-black rounded z-10 flex flex-col items-center justify-center"
+            className="absolute p-3 bg-teal-500 text-black rounded z-10 hidden md:flex flex-col items-center justify-center"
             style={{ top: "45%", right: "8%", transform: "rotate(12deg)", width: "140px", height: "140px" }}
           >
             <img src="/olaleyevictor/research.png" alt="research" className="w-10 h-10 mb-1" />
             <div className="text-[8px] font-bold text-center">APPLIED</div>
             <div className="text-[8px] text-center">RESEARCH</div>
+          </div>
+        </div>
+
+        {/* Mobile badges strip mirrors desktop badges without overlap */}
+        <div className="flex md:hidden gap-3 overflow-x-auto pb-2 -mx-4 px-4 mt-6 mb-8">
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-orange-400 text-black text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/fullStack.png" alt="full-stack" className="w-5 h-5" />
+            FULL-STACK
+          </div>
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-red-500 text-white text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/security.png" alt="security" className="w-5 h-5" />
+            SECURITY
+          </div>
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-yellow-400 text-black text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/story.png" alt="storytelling" className="w-5 h-5" />
+            VISUAL
+          </div>
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-purple-500 text-white text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/uI.png" alt="ui" className="w-5 h-5" />
+            SYSTEMS
+          </div>
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-lime-400 text-black text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/code.png" alt="code" className="w-5 h-5" />
+            INTERACTIVE
+          </div>
+          <div className="flex-shrink-0 flex items-center gap-2 px-4 py-3 rounded-full bg-teal-500 text-white text-xs font-bold min-h-[44px]">
+            <img src="/olaleyevictor/research.png" alt="research" className="w-5 h-5" />
+            RESEARCH
           </div>
         </div>
       </div>
