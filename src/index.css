@@ -10,3 +10,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  /* Apply the hero title transform only on sm screens and above */
+  @media (min-width: 640px) {
+    .hero-title-transform {
+      transform: scaleY(1.9) scaleX(1.5);
+    }
+  }
+}
