@@ -89,7 +89,7 @@ export function About() {
     <div className="min-h-screen bg-black text-white pt-32 md:pt-40 pb-16">
       <div className="max-w-7xl mx-auto px-4">
         {/* ABOUT ME SECTION */}
-        <div className="mb-12 md:mb-20">
+        <div className="mb-20">
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-orange-200 mb-8 md:mb-12 tracking-wide">
             ABOUT ME
           </h1>
@@ -141,7 +141,7 @@ export function About() {
         </div>
 
         {/* SKILLS & EXPERTISE SECTION */}
-        <div className="mb-12 md:mb-20">
+        <div className="mb-20 ">
           <h2 className="text-4xl sm:text-5xl md:text-7xl font-black mb-10 md:mb-12 tracking-wide">
             SKILLS & EXPERTISE
           </h2>
