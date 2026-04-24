@@ -62,7 +62,7 @@ export function Home() {
           }}
         >
           <img
-            src="/portfolioRebuild/myPics.webp"
+            src="/olaleyevictor/myPics.webp"
             alt="Hero"
             className="absolute inset-0 w-full h-full object-contain "
             style={{ objectPosition: "center" }}
