@@ -30,7 +30,7 @@ export default function MenuBar() {
           className="flex items-center md:gap-2"
           onClick={() => setIsMenuOpen(false)}
         >
-          <img src="/portfolioRebuild/myLogo.svg" alt="logo" className="w-16 h-16 md:w-20 md:h-20" />
+          <img src="/olaleyevictor/myLogo.svg" alt="logo" className="w-16 h-16 md:w-20 md:h-20" />
           <div className="text-white">
             <div className="font-semibold text-sm md:text-base">Olaleye Victor</div>
             <div className="text-xs md:text-sm">Mobolaji</div>
