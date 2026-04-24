@@ -7,9 +7,9 @@ export function Home() {
     <div className="min-h-screen bg-black text-orange-200 pt-32 md:pt-40 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4">
         {/* Hero Section */}
-        <div className="text-center mb-8 md:mb-12">
+        <div className="text-center mb-8 md:mb-12 overflow-hidden">
           <h1
-            className="text-3xl sm:text-5xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide [transform:scaleY(1.35)_scaleX(1.05)] sm:[transform:scaleY(1.55)_scaleX(1.18)] md:[transform:scaleY(1.9)_scaleX(1.5)]"
+            className="text-2xl sm:text-5xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide [transform:scaleY(1.3)_scaleX(1.0)] sm:[transform:scaleY(1.55)_scaleX(1.18)] md:[transform:scaleY(1.9)_scaleX(1.5)]"
           >
             CREATIVE TECHNOLOGIST
           </h1>

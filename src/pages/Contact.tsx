@@ -72,7 +72,7 @@ export function Contact() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-base text-white focus:border-white focus:outline-none transition-colors"
                           placeholder="Your name"
                           required
                         />
@@ -88,7 +88,7 @@ export function Contact() {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-white focus:border-white focus:outline-none transition-colors"
+                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-base text-white focus:border-white focus:outline-none transition-colors"
                           placeholder="your@email.com"
                           required
                         />
@@ -104,7 +104,7 @@ export function Contact() {
                           value={formData.message}
                           onChange={handleChange}
                           rows={6}
-                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-white focus:border-white focus:outline-none transition-colors resize-none"
+                          className="w-full bg-gray-900 border border-gray-700 rounded-lg md:rounded-xl px-4 py-3 text-base text-white focus:border-white focus:outline-none transition-colors resize-none"
                           placeholder="Tell me about your project..."
                           required
                         ></textarea>
@@ -139,7 +139,7 @@ export function Contact() {
                             {IconComponent && <IconComponent className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:scale-110 transition-transform" />}
                             <div className="flex-1 min-w-0">
                               <div className="font-semibold mb-1 text-sm md:text-base">{link.name}</div>
-                              <div className="text-xs md:text-sm text-gray-400 truncate">{link.handle}</div>
+                              <div className="text-xs md:text-sm text-gray-400 truncate max-w-[160px] sm:max-w-none">{link.handle}</div>
                             </div>
                           </a>
                         );

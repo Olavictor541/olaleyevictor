@@ -27,7 +27,7 @@ export default function MenuBar() {
         {/* Logo & Site Name */}
         <Link
           to="/"
-          className="flex items-center md:gap-2"
+          className="flex items-center gap-2"
           onClick={() => setIsMenuOpen(false)}
         >
           <img src="/olaleyevictor/myLogo.svg" alt="logo" className="w-16 h-16 md:w-20 md:h-20" />
