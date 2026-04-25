@@ -9,7 +9,7 @@ export function Home() {
         {/* Hero Section */}
         <div className="text-center mb-8 md:mb-12">
           <h1
-            className="text-3xl sm:text-5xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide [transform:scaleY(1.35)_scaleX(1.05)] sm:[transform:scaleY(1.55)_scaleX(1.18)] md:[transform:scaleY(1.9)_scaleX(1.5)]"
+            className="text-3xl sm:text-5xl md:text-8xl lg:text-[5rem] leading-none font-impact font-black tracking-wide [transform:scaleY(1.35)_scaleX(1.05)] md:[transform:scaleY(1.9)_scaleX(1.5)]"
           >
             CREATIVE TECHNOLOGIST
           </h1>
