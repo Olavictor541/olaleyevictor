@@ -6,6 +6,7 @@ import { asset, profile } from "../data";
 const roles = [
   { title: "Computer Science student", place: profile.school, when: "Now" },
   { title: "Director-at-large", place: "VIU student union", when: "Now" },
+  { title: "Designer", place: "Brand identity & storefront signage", when: "Ongoing" },
 ];
 
 const disciplines = [
