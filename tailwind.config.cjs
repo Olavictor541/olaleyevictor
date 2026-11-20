@@ -4,8 +4,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'gasoek-one': ['Gasoek One', 'sans-serif'],
-        'impact': ['Impact', 'sans-serif'],
+         
+        'impact': ['Impact', 'Haettenschweiler', '"Arial Narrow Bold"', 'sans-serif'],
       },
     },
   },

@@ -1,92 +1,144 @@
-export function Crafts() {
-  // Gallery artwork data
-  const artworks = [
-    {
-      id: 1,
-      title: "Mindless #1",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m3.webp",
-      size: "large"
-    },
-    {
-      id: 2,
-      title: "Transformation: A far above mentality",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m2.webp",
-      size: "small"
-    },
-    {
-      id: 3,
-      title: "The Mind of Christ: A superior belief system",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m4.webp",
-      size: "small"
-    },
-    {
-      id: 4,
-      title: "The Seeing Eyes",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m6.webp",
-      size: "large"
-    },
-    {
-      id: 5,
-      title: "Elevation: A higher calling #1",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m5.webp",
-      size: "small"
-    },
-    {
-      id: 6,
-      title: "Untitled",
-      artist: "Victor Olaleye",
-      image: "/olaleyevictor/m7.webp",
-      size: "small"
-    },
-  ];
+import { useCallback, useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, X, Maximize2 } from "lucide-react";
+import { Reveal, SectionHeading } from "../components/Reveal";
+import { usePageTitle } from "../components/usePageTitle";
+import { artworks, asset, profile } from "../data";
+
+export default function Crafts() {
+  usePageTitle("Crafts");
+  const [open, setOpen] = useState<number | null>(null);
+
+  const close = useCallback(() => setOpen(null), []);
+  const step = useCallback(
+    (dir: 1 | -1) => setOpen((i) => (i === null ? i : (i + dir + artworks.length) % artworks.length)),
+    []
+  );
+
+  // Keyboard controls + scroll lock for the lightbox
+  useEffect(() => {
+    if (open === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "ArrowLeft") step(-1);
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, close, step]);
+
+  const current = open === null ? null : artworks[open];
 
   return (
-    <div className="min-h-screen bg-black text-white pt-32 md:pt-40 pb-12">
+    <div className="pt-32 md:pt-40 pb-20 text-white">
       <div className="max-w-7xl mx-auto px-4">
-        {/* Page Title */}
-        <div className="mb-16 md:mb-20">
-          <h1 className="text-4xl text-orange-200 md:text-6xl font-black mb-4">CRAFTS</h1>
-          <p className="text-gray-400 max-w-2xl text-base md:text-lg">
-            A collection of visual artworks that reflect my passion for creativity and storytelling. 
+        <Reveal>
+          <SectionHeading eyebrow="Collage · Graphite · Mixed media">CRAFTS</SectionHeading>
+          <p className="mt-6 text-gray-400 max-w-2xl text-base md:text-lg">
+            Visual artworks that reflect my passion for creativity and storytelling: explorations of the mind, faith,
+            identity and the world we live in. Tap any piece to view it full size.
           </p>
-        </div>
+        </Reveal>
 
-        {/* Masonry Gallery Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 auto-rows-max">
-          {artworks.map((artwork) => (
-            <div
-              key={artwork.id}
-              className={`overflow-hidden rounded-lg group cursor-pointer ${
-                artwork.size === "large" ? "md:col-span-2" : ""
-              }`}
-            >
-              {/* Image Container */}
-              <div className="relative bg-gray-900 overflow-hidden aspect-video md:aspect-auto">
+        {/* Masonry gallery: portrait works keep their natural proportions */}
+        <div className="mt-12 md:mt-16 columns-1 sm:columns-2 lg:columns-3 gap-5 md:gap-6">
+          {artworks.map((a, i) => (
+            <Reveal key={a.id} delay={(i % 3) * 100} className="mb-5 md:mb-6 break-inside-avoid">
+              <button
+                onClick={() => setOpen(i)}
+                className="group relative block w-full overflow-hidden rounded-2xl bg-white text-left"
+                aria-label={`View “${a.title}” full size`}
+              >
                 <img
-                  src={artwork.image}
-                  alt={artwork.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  src={asset(a.image)}
+                  alt={a.title}
+                  width={a.width}
+                  height={a.height}
+                  loading="lazy"
+                  className="w-full h-auto group-hover:scale-[1.03] transition-transform duration-500"
                 />
-
-                {/* Overlay on Hover */}
-                <div className="absolute inset-0 bg-black/35 md:bg-black md:bg-opacity-0 md:group-hover:bg-opacity-40 transition-all duration-300 flex items-end">
-                  <div className="w-full p-4 md:p-6 translate-y-0 md:translate-y-full md:group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-lg md:text-xl font-bold mb-1">{artwork.title}</h3>
-                    <p className="text-sm text-gray-300">{artwork.artist}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <div className="w-full p-5 md:p-6 flex items-end justify-between gap-4">
+                    <div>
+                      <h3 className="text-lg md:text-xl font-bold leading-snug">{a.title}</h3>
+                      <p className="text-sm text-gray-300 mt-1">{a.medium}</p>
+                    </div>
+                    <Maximize2 className="w-5 h-5 flex-shrink-0 text-orange-200" />
                   </div>
                 </div>
-              </div>
-            </div>
+              </button>
+            </Reveal>
           ))}
         </div>
+
+        <p className="mt-10 text-center text-sm text-gray-500">
+          Interested in a piece or a commission?{" "}
+          <a href={`mailto:${profile.email}?subject=Artwork%20enquiry`} className="text-orange-200 hover:underline">
+            Get in touch
+          </a>
+          .
+        </p>
       </div>
+
+      {/* ---------- LIGHTBOX ---------- */}
+      {current && (
+        <div
+          className="fixed inset-0 z-[60] bg-black flex flex-col"
+          role="dialog"
+          aria-modal="true"
+          aria-label={current.title}
+          onClick={close}
+        >
+          <div className="flex items-center justify-between px-4 md:px-8 h-16 text-sm text-gray-400">
+            <span>
+              {open! + 1} / {artworks.length}
+            </span>
+            <button onClick={close} className="p-2 -mr-2 text-white hover:text-orange-200" aria-label="Close" autoFocus>
+              <X className="w-7 h-7" />
+            </button>
+          </div>
+
+          <div className="relative flex-1 min-h-0 flex items-center justify-center px-4 md:px-20">
+            <img
+              key={current.id}
+              src={asset(current.image)}
+              alt={current.title}
+              onClick={(e) => e.stopPropagation()}
+              className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
+            />
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                step(-1);
+              }}
+              className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-14 md:h-14 grid place-items-center rounded-full bg-white/10 hover:bg-orange-200 hover:text-black text-white transition-colors"
+              aria-label="Previous artwork"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                step(1);
+              }}
+              className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-11 h-11 md:w-14 md:h-14 grid place-items-center rounded-full bg-white/10 hover:bg-orange-200 hover:text-black text-white transition-colors"
+              aria-label="Next artwork"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="px-4 py-5 md:py-6 text-center" onClick={(e) => e.stopPropagation()}>
+            <h2 className="text-lg md:text-2xl font-bold text-white">{current.title}</h2>
+            <p className="text-sm text-gray-400 mt-1">
+              {current.medium} · {profile.name}
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
-export default Crafts;

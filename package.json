@@ -1,5 +1,5 @@
 {
-  "name": "portfolio_rebuild",
+  "name": "olaleyevictor-portfolio",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -34,7 +34,7 @@
     "typescript-eslint": "^8.58.0",
     "vite": "^8.0.4"
   },
-  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "description": "Personal portfolio of Olaleye Victor, Creative Technologist",
   "main": "eslint.config.js",
   "keywords": [],
   "author": "",
