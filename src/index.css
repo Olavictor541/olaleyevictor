@@ -1,76 +1,174 @@
-@font-face {
-  font-family: 'Impact';
-  src: url('/olaleyevictor/fonts/impact.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Colour tokens. Light is a warm cream; dark is a deep olive. */
+:root {
+  --bg: #f7f2ed;
+  --title: oklch(0.374 0.01 67.558);
+  --text: rgba(87, 83, 78, 0.9);
+  --intro: rgba(139, 129, 122, 0.9);
+  --item: oklab(0.374 0.0038 0.0092 / 0.75);
+  --sub: oklch(0.553 0.013 58.071 / 0.6);
+  --faint: oklab(0.709 0.0056 0.0083 / 0.75);
+  --caption: oklab(0.553 0.0069 0.011 / 0.75);
+  --link: oklch(0.444 0.011 73.639);
+  --link-deco: oklch(0.709 0.01 56.259 / 0.3);
+  --line: oklch(0.9 0.012 70);
+  --well: oklch(0.94 0.01 70);
+  --card: #ffffff;
+  --nav-bg: oklch(0.93 0.018 80 / 0.7);
+  --nav-item: oklch(0.75 0.03 80 / 0.85);
+  --nav-item-hover: oklch(0.55 0.03 80);
+  --accent: oklch(0.45 0.12 125);
+  --code-bg: oklch(0.94 0.01 70);
+  color-scheme: light;
+}
+.dark {
+  --bg: oklch(0.185 0.1 120);
+  --title: oklch(0.93 0.012 140);
+  --text: oklch(0.85 0.012 140 / 0.9);
+  --intro: oklch(0.8 0.015 140 / 0.8);
+  --item: oklch(0.89 0.012 145 / 0.85);
+  --sub: oklch(0.75 0.02 140 / 0.6);
+  --faint: oklch(0.65 0.02 140 / 0.6);
+  --caption: oklch(0.72 0.02 140 / 0.7);
+  --link: oklch(0.89 0.012 145);
+  --link-deco: oklch(0.45 0.025 125 / 0.75);
+  --line: oklch(0.28 0.06 122);
+  --well: oklch(0.22 0.08 121);
+  --card: oklch(0.25 0.06 122);
+  --nav-bg: oklch(0.23 0.07 122 / 0.8);
+  --nav-item: oklch(0.75 0.03 145 / 0.85);
+  --nav-item-hover: oklch(0.9 0.02 145);
+  --accent: oklch(0.62 0.12 125);
+  --code-bg: oklch(0.22 0.08 121);
+  color-scheme: dark;
+}
+
 @layer base {
   html {
-    scroll-behavior: smooth;
     -webkit-tap-highlight-color: transparent;
   }
   body {
-    @apply bg-black text-white antialiased;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    @apply bg-page font-sans antialiased;
+    color: var(--title);
+    font-optical-sizing: auto;
   }
   ::selection {
-    @apply bg-orange-200 text-black;
+    background: oklch(0.85 0.08 125 / 0.5);
   }
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-orange-300;
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 6px;
   }
 }
 
 @layer components {
-  /* Signature cream grid used behind portraits */
-  .grid-paper {
-    background-color: #ffe5b0;
-    background-image:
-      linear-gradient(0deg, #676464 1px, transparent 1px),
-      linear-gradient(90deg, #676464 1px, transparent 1px);
-    background-size: 70px 70px;
+  /* Inline link inside reading text */
+  .link {
+    color: var(--link);
+    font-weight: 500;
+    text-decoration-line: underline;
+    text-decoration-color: var(--link-deco);
+    text-decoration-thickness: 2.4px;
+    text-underline-offset: 2px;
+    transition: text-decoration-color 0.15s ease;
   }
-  .grid-paper-dark {
-    background-image:
-      linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 70px 70px;
-  }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .reveal-in {
-    opacity: 1;
-    transform: none;
+  .link:hover {
+    text-decoration-color: currentColor;
   }
 
-  .marquee-track {
-    animation: marquee 30s linear infinite;
+  /* Long-form reading text (About, posts, project pages) */
+  .prose-body {
+    @apply font-serif text-prose;
+    font-size: 19px;
+    line-height: 1.55;
   }
-  .float-slow {
-    animation: float 6s ease-in-out infinite;
+  .prose-body > * + * {
+    margin-top: 1.25em;
+  }
+  .prose-body h2 {
+    @apply font-serif text-title font-semibold;
+    font-size: 1.15em;
+    margin-top: 2em;
+  }
+  .prose-body h3 {
+    @apply font-serif text-title font-semibold;
+    margin-top: 1.6em;
+  }
+  .prose-body h2 + *,
+  .prose-body h3 + * {
+    margin-top: 0.4em;
+  }
+  .prose-body a {
+    @apply link;
+  }
+  .prose-body ul {
+    list-style: disc;
+    padding-left: 1.3em;
+  }
+  .prose-body ol {
+    list-style: decimal;
+    padding-left: 1.3em;
+  }
+  .prose-body li + li {
+    margin-top: 0.35em;
+  }
+  .prose-body li::marker {
+    color: var(--faint);
+  }
+  .prose-body strong {
+    @apply text-title font-semibold;
+  }
+  .prose-body blockquote {
+    border-left: 3px solid var(--line);
+    padding-left: 1em;
+    color: var(--intro);
+  }
+  .prose-body :not(pre) > code {
+    @apply font-mono;
+    font-size: 0.8em;
+    background: var(--code-bg);
+    border-radius: 6px;
+    padding: 0.15em 0.4em;
+  }
+  .prose-body pre {
+    @apply font-mono;
+    font-size: 14px;
+    line-height: 1.6;
+    background: var(--code-bg);
+    border-radius: 12px;
+    padding: 1rem 1.15rem;
+    overflow-x: auto;
+  }
+  .prose-body img {
+    border-radius: 12px;
+  }
+  .prose-body hr {
+    border-color: var(--line);
+  }
+
+  /* Small rounded label, e.g. a category */
+  .pill {
+    @apply inline-flex items-center rounded-full px-3 py-0.5 font-sans text-[15px] font-medium;
+    background: var(--well);
+    color: var(--caption);
   }
 }
 
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-@keyframes float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -10px; }
-}
+/* Syntax colours for code blocks (highlight.js classes) */
+.hljs-keyword, .hljs-built_in, .hljs-type { color: oklch(0.5 0.12 125); }
+.hljs-string, .hljs-attr { color: oklch(0.52 0.1 60); }
+.hljs-number, .hljs-literal { color: oklch(0.55 0.12 30); }
+.hljs-comment { color: var(--faint); font-style: italic; }
+.hljs-title, .hljs-title.function_ { color: oklch(0.45 0.08 250); }
+.dark .hljs-keyword, .dark .hljs-built_in, .dark .hljs-type { color: oklch(0.8 0.12 125); }
+.dark .hljs-string, .dark .hljs-attr { color: oklch(0.82 0.08 70); }
+.dark .hljs-number, .dark .hljs-literal { color: oklch(0.8 0.1 40); }
+.dark .hljs-title, .dark .hljs-title.function_ { color: oklch(0.82 0.06 230); }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee-track, .float-slow { animation: none; }
+  * { transition: none !important; animation: none !important; }
 }
