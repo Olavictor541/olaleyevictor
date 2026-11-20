@@ -1,64 +1,77 @@
-import { useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { PageIntro } from "../components/Section";
+import { Link } from "react-router-dom";
+import { Carousel, WorkCard } from "../components/cards";
+import { Caption, Page, PageHeader } from "../components/ui";
 import { usePageTitle } from "../components/usePageTitle";
-import { profile, projects } from "../data";
+import { asset, profile, projects } from "../data";
+
+const byDate = [...projects].sort((a, b) => b.date.localeCompare(a.date));
+const categories = ["Software", "Web"] as const;
+
+function monthYear(ym: string) {
+  const [y, m] = ym.split("-").map(Number);
+  return new Date(y, m - 1, 1).toLocaleDateString("en-US", { month: "long", year: "numeric" });
+}
 
 export default function Work() {
   usePageTitle("Work");
-  const { hash } = useLocation();
-
-  // Arriving from /work#slug: scroll to that project
-  useEffect(() => {
-    if (!hash) return;
-    const t = setTimeout(() => document.getElementById(hash.slice(1))?.scrollIntoView({ block: "start" }), 50);
-    return () => clearTimeout(t);
-  }, [hash]);
+  const latest = byDate[0];
+  const hero = byDate.find((p) => p.images?.length);
 
   return (
-    <>
-      <PageIntro title="Work">
-        <p>Software, websites and design. Some are class projects, some are client work.</p>
-      </PageIntro>
+    <Page>
+      <PageHeader title="Work" subtitle="Things I've built: software, websites and experiments." />
 
-      <div className="mt-12 space-y-14">
-        {projects.map((p) => (
-          <article key={p.slug} id={p.slug} className="scroll-mt-8 border-t rule pt-8">
-            <div className="flex items-baseline justify-between gap-4">
-              <h2 className="text-lg sm:text-xl font-semibold tracking-tight">{p.title}</h2>
-              <span className="text-[15px] muted tabular-nums shrink-0">{p.year}</span>
-            </div>
-            <p className="mt-1 text-[15px] muted">
-              {p.role} · {p.kind}
-            </p>
+      {hero?.images && (
+        <figure className="mt-12">
+          <Link to={`/work/${hero.slug}`} className="block overflow-hidden rounded-xl bg-card ring-1 ring-[color:var(--line)]">
+            <img src={asset(hero.images[0].src)} alt={hero.title} className="w-full h-auto" />
+          </Link>
+          <Caption>
+            {byDate.map((p, i) => (
+              <span key={p.slug}>
+                <Link to={`/work/${p.slug}`} className="link">
+                  {p.title}
+                </Link>
+                {i < byDate.length - 1 ? ", " : "."}
+              </span>
+            ))}
+          </Caption>
+        </figure>
+      )}
 
-            <p className="mt-4 text-[17px] leading-relaxed text-stone-700 dark:text-stone-300">{p.summary}</p>
+      {/* Rounded panel holding every collection, like a shelf */}
+      <div className="mt-16 -mx-6 sm:-mx-10 rounded-[32px] border-2 border-line px-6 sm:px-10 py-10 flex flex-col gap-14 overflow-hidden">
+        <Carousel
+          title="Recently added"
+          aside={
+            <p className="font-sans text-[15px] font-medium text-faint">Updated {monthYear(latest.date)}</p>
+          }
+        >
+          {byDate.map((p) => (
+            <WorkCard key={p.slug} project={p} />
+          ))}
+        </Carousel>
 
-            <ul className="mt-4 space-y-2 text-[16px] leading-relaxed text-stone-700 dark:text-stone-300 list-disc pl-5 marker:text-stone-400">
-              {p.points.map((pt) => (
-                <li key={pt}>{pt}</li>
+        {categories.map((c) => {
+          const list = byDate.filter((p) => p.category === c);
+          if (!list.length) return null;
+          return (
+            <Carousel key={c} title={c}>
+              {list.map((p) => (
+                <WorkCard key={p.slug} project={p} showCategory={false} />
               ))}
-            </ul>
-
-            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-[15px]">
-              <span className="muted">{p.stack.join(", ")}</span>
-              {p.links?.map((l) => (
-                <a key={l.href} href={l.href} target="_blank" rel="noopener noreferrer" className="link">
-                  {l.label} ↗
-                </a>
-              ))}
-            </div>
-          </article>
-        ))}
+            </Carousel>
+          );
+        })}
       </div>
 
-      <p className="mt-16 border-t rule pt-8 text-[17px] leading-relaxed text-stone-700 dark:text-stone-300">
+      <p className="prose-body mt-14">
         More code and experiments are on{" "}
         <a href={profile.github} target="_blank" rel="noopener noreferrer" className="link">
           GitHub
         </a>
-        .
+        , and I write about what I'm building in my <Link to="/posts" className="link">posts</Link>.
       </p>
-    </>
+    </Page>
   );
 }

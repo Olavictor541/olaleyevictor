@@ -1,5 +1,5 @@
 import { useState, type ChangeEvent, type FormEvent } from "react";
-import { PageIntro, Section } from "../components/Section";
+import { Page, PageHeader } from "../components/ui";
 import { usePageTitle } from "../components/usePageTitle";
 import { profile } from "../data";
 
@@ -12,7 +12,7 @@ export default function Contact() {
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  // The site is static, so the form opens the visitor's email app with the message filled in.
+  // The site is static, so the form opens the visitor's email app with everything filled in.
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
     const subject = `Hello from ${form.name}`;
@@ -32,75 +32,51 @@ export default function Contact() {
   };
 
   const field =
-    "w-full rounded-md border rule bg-white dark:bg-stone-900 px-3.5 py-2.5 text-[16px] placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:border-stone-500 dark:focus:border-stone-500 transition-colors";
+    "w-full rounded-xl border border-line bg-well px-4 py-3 font-sub text-[18px] text-title placeholder:text-faint focus:outline-none focus:border-[color:var(--accent)] transition-colors";
 
   return (
-    <>
-      <PageIntro title="Contact">
-        <p>
-          The easiest way to reach me is email. I'm open to web projects, branding and signage, art commissions, or just
-          a chat.
-        </p>
-      </PageIntro>
+    <Page>
+      <PageHeader title="Contact" subtitle="Say hello. I read everything." />
 
-      <div className="mt-8 flex flex-wrap items-center gap-3">
-        <a
-          href={`mailto:${profile.email}`}
-          className="text-lg sm:text-xl font-medium link break-all"
-        >
-          {profile.email}
-        </a>
-        <button
-          onClick={copy}
-          className="text-sm muted border rule rounded-full px-3 py-1 hover:text-stone-900 dark:hover:text-stone-100 transition-colors"
-        >
-          {copied ? "Copied" : "Copy"}
-        </button>
+      <div className="prose-body mt-10">
+        <p>
+          The best way to reach me is email at{" "}
+          <a href={`mailto:${profile.email}`} className="link">
+            {profile.email}
+          </a>{" "}
+          <button
+            onClick={copy}
+            className="align-middle ml-1 rounded-full bg-well px-2.5 py-0.5 font-sans text-[13px] font-semibold text-caption hover:text-item transition-colors"
+          >
+            {copied ? "Copied" : "Copy"}
+          </button>
+        </p>
+        <p>
+          I'm open to web projects, collaborations, art commissions, or just a chat about code. You can also find me on{" "}
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a> and{" "}
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="link">GitHub</a>.
+        </p>
       </div>
 
-      <Section title="Elsewhere">
-        <ul className="divide-y divide-stone-200 dark:divide-stone-800 border-y rule">
-          {[
-            { label: "LinkedIn", handle: "in/olaleye-victor", href: profile.linkedin },
-            { label: "GitHub", handle: "@Olavictor541", href: profile.github },
-          ].map((l) => (
-            <li key={l.label}>
-              <a href={l.href} target="_blank" rel="noopener noreferrer" className="group flex justify-between gap-4 py-4">
-                <span className="font-medium group-hover:underline underline-offset-[3px] decoration-stone-400">{l.label}</span>
-                <span className="text-[15px] muted">{l.handle} ↗</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section title="Or send a message">
-        <form onSubmit={onSubmit} className="space-y-4">
-          <div className="grid sm:grid-cols-2 gap-4">
-            <label className="block">
-              <span className="block text-sm mb-1.5 muted">Name</span>
-              <input name="name" autoComplete="name" required value={form.name} onChange={onChange} className={field} />
-            </label>
-            <label className="block">
-              <span className="block text-sm mb-1.5 muted">Email</span>
-              <input name="email" type="email" autoComplete="email" required value={form.email} onChange={onChange} className={field} />
-            </label>
-          </div>
-          <label className="block">
-            <span className="block text-sm mb-1.5 muted">Message</span>
-            <textarea name="message" rows={5} required value={form.message} onChange={onChange} className={`${field} resize-y`} />
-          </label>
+      <form onSubmit={onSubmit} className="mt-12 flex flex-col gap-3">
+        <h2 className="font-sans text-[20px] leading-[30px] font-medium tracking-[-0.03em] text-item mb-2">Send a message</h2>
+        <div className="grid sm:grid-cols-2 gap-3">
+          <input name="name" aria-label="Name" placeholder="Name" autoComplete="name" required value={form.name} onChange={onChange} className={field} />
+          <input name="email" aria-label="Email" placeholder="Email" type="email" autoComplete="email" required value={form.email} onChange={onChange} className={field} />
+        </div>
+        <textarea name="message" aria-label="Message" placeholder="Message" rows={5} required value={form.message} onChange={onChange} className={`${field} resize-y`} />
+        <div className="flex flex-wrap items-center gap-4 mt-1">
           <button
             type="submit"
-            className="rounded-md bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900 px-5 py-2.5 text-[15px] font-medium hover:opacity-85 transition-opacity"
+            className="rounded-full border-2 border-line px-6 py-2.5 font-sans text-[17px] font-medium text-item hover:bg-well transition-colors"
           >
             Send
           </button>
-          <p aria-live="polite" className="text-sm muted min-h-[1.25rem]">
-            {sent && "Your email app should open with the message ready. If it didn't, email me at the address above."}
+          <p aria-live="polite" className="font-sans text-[15px] font-medium text-faint">
+            {sent && "Your email app should open with the message ready to send."}
           </p>
-        </form>
-      </Section>
-    </>
+        </div>
+      </form>
+    </Page>
   );
 }

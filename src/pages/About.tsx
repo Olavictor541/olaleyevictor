@@ -1,101 +1,93 @@
 import { Link } from "react-router-dom";
-import { PageIntro, Section } from "../components/Section";
+import { AgeCounter } from "../components/AgeCounter";
+import { Caption, Page, PageHeader } from "../components/ui";
 import { usePageTitle } from "../components/usePageTitle";
-import { asset, profile } from "../data";
+import { artBySlug, asset, profile } from "../data";
 
-const roles = [
-  { title: "Computer Science student", place: profile.school, when: "Now" },
-  { title: "Director-at-large", place: "VIU student union", when: "Now" },
-];
-
-const disciplines = [
-  {
-    title: "Software",
-    text: "Websites and applications. I like planning a system properly (domain models, diagrams, a sensible database) and then building the interface people actually touch.",
-  },
-  {
-    title: "Design",
-    text: "Logos, brand identities and storefront signage. I want a business to look as good on the street as it does online.",
-  },
-  {
-    title: "Art",
-    text: "Mixed media collage and graphite drawing. My pieces explore the mind, faith and identity, and how what we believe shapes how we see the world.",
-  },
-];
-
+const featuredArt = ["mindless", "the-seeing-eyes", "elevation"].map((s) => artBySlug(s)!);
 const tools = ["React", "TypeScript", "JavaScript", "C++", "SQL", "Tailwind CSS", "Git", "UML", "Illustrator", "Photoshop"];
 
 export default function About() {
   usePageTitle("About");
+  const seeingEyes = artBySlug("the-seeing-eyes")!;
 
   return (
-    <>
-      <PageIntro title="About" />
+    <Page>
+      <PageHeader title="Hello" subtitle={`I'm ${profile.fullName}, but I go by Victor`} />
 
-      <figure className="mt-8">
-        <div className="aspect-[4/3] sm:aspect-[16/10] overflow-hidden rounded-lg bg-[#e8e2d6] dark:bg-stone-800">
+      <figure className="mt-10">
+        <div className="aspect-square overflow-hidden rounded-xl bg-[#e6ddd1] dark:bg-[oklch(0.3_0.05_122)]">
           <img
             src={asset("myPics.webp")}
             alt="Olaleye Victor"
             width={1669}
             height={1800}
-            className="w-full h-full object-contain object-bottom"
+            className="w-full h-full object-cover object-top"
           />
         </div>
       </figure>
 
-      <div className="mt-10 space-y-4 text-[17px] leading-relaxed text-stone-700 dark:text-stone-300">
+      <div className="prose-body mt-10">
         <p>
-          I'm Olaleye Victor Mobolaji, but most people call me Victor. I'm a creative technologist, which is my way of
-          saying I sit between code and design and don't want to give up either.
+          I'm a creative technologist: a developer who cares how things look, and a designer who writes code. I like taking
+          an idea all the way to something finished that works and looks right, and I believe understanding the
+          technical side is a big part of making things feel good.
         </p>
         <p>
-          If you need a fast, modern website, I can build it. If you need a visual identity or signage for your shop, I
-          can design it. Most people do one or the other. I like seeing a project through from a rough idea to the
-          finished thing, so the brand looks right <em>and</em> the tools work.
+          I'm studying Computer Science at {profile.school}, where I also serve students as a director-at-large on the
+          student union. I'm sharpening my problem solving on LeetCode and writing up what I learn in my{" "}
+          <Link to="/posts" className="link">posts</Link>, alongside the{" "}
+          <Link to="/work" className="link">projects</Link> I'm building.
         </p>
         <p>
-          I'm studying Computer Science at {profile.school}. Outside class, I serve students as a director-at-large on
-          the student union, and I keep drawing.
+          {profile.birthDate ? (
+            <>
+              I'm <AgeCounter birthDate={profile.birthDate} /> years old and live on {profile.location}.
+            </>
+          ) : (
+            <>I live on {profile.location}.</>
+          )}{" "}
+          When I'm not coding, I make art: mixed media collage and graphite drawings about the mind, faith and identity,
+          like{" "}
+          {featuredArt.map((a, i) => (
+            <span key={a.slug}>
+              <Link to={`/art/${a.slug}`} className="link">
+                {a.title.replace(/:.*$/, "")}
+              </Link>
+              {i < featuredArt.length - 2 ? ", " : i === featuredArt.length - 2 ? " and " : ""}
+            </span>
+          ))}
+          . You can see them all in my <Link to="/art" className="link">art gallery</Link>.
         </p>
       </div>
 
-      <Section title="What I do">
-        <dl className="space-y-6">
-          {disciplines.map((d) => (
-            <div key={d.title} className="grid sm:grid-cols-[120px_1fr] gap-1 sm:gap-6">
-              <dt className="font-medium">{d.title}</dt>
-              <dd className="text-[16px] leading-relaxed muted">{d.text}</dd>
-            </div>
-          ))}
-        </dl>
-      </Section>
+      <figure className="mt-12">
+        <Link to={`/art/${seeingEyes.slug}`} className="block overflow-hidden rounded-xl bg-white">
+          <img
+            src={asset(seeingEyes.image)}
+            alt={seeingEyes.title}
+            width={seeingEyes.width}
+            height={seeingEyes.height}
+            loading="lazy"
+            className="w-full h-auto"
+          />
+        </Link>
+        <Caption>
+          <Link to={`/art/${seeingEyes.slug}`} className="link">{seeingEyes.title}</Link>, {seeingEyes.medium.toLowerCase()}
+        </Caption>
+      </figure>
 
-      <Section title="Currently">
-        <ul className="divide-y divide-stone-200 dark:divide-stone-800 border-y rule">
-          {roles.map((r) => (
-            <li key={r.title} className="flex items-baseline justify-between gap-4 py-4">
-              <span>
-                <span className="font-medium">{r.title}</span>
-                <span className="block text-[15px] muted">{r.place}</span>
-              </span>
-              <span className="text-[15px] muted shrink-0">{r.when}</span>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      <Section title="Tools I use">
-        <p className="text-[16px] leading-relaxed muted">{tools.join(" · ")}</p>
-      </Section>
-
-      <Section title="Next">
-        <p className="text-[17px] leading-relaxed text-stone-700 dark:text-stone-300">
-          See <Link to="/work" className="link">what I've built</Link>, browse{" "}
-          <Link to="/art" className="link">my art</Link>, or{" "}
-          <Link to="/contact" className="link">get in touch</Link>.
+      <div className="prose-body mt-12">
+        <p>
+          The tools I reach for most are {tools.slice(0, -1).join(", ")} and {tools[tools.length - 1]}.
         </p>
-      </Section>
-    </>
+        <p>
+          You can find me on{" "}
+          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="link">GitHub</a> and{" "}
+          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="link">LinkedIn</a>, or{" "}
+          <Link to="/contact" className="link">get in touch</Link> directly. I'm always happy to talk about a project.
+        </p>
+      </div>
+    </Page>
   );
 }

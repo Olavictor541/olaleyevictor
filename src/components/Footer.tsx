@@ -1,24 +1,27 @@
+import { Link } from "react-router-dom";
 import { profile } from "../data";
 
 export default function Footer() {
+  const sep = <span className="text-faint opacity-60">·</span>;
   return (
-    <footer className="w-full max-w-2xl mx-auto px-5 sm:px-6 pb-12">
-      <div className="border-t rule pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm muted">
+    <footer className="w-full max-w-col mx-auto px-6 pb-14">
+      <p className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-sans text-[15px] font-medium text-faint">
         <span>
-          © {new Date().getFullYear()} {profile.name}
+          Handcrafted by <Link to="/about" className="text-item hover:opacity-70 transition-opacity">Victor</Link> since {profile.since}
         </span>
-        <div className="flex gap-5">
-          <a href={profile.github} target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
-            GitHub
-          </a>
-          <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
-            LinkedIn
-          </a>
-          <a href={`mailto:${profile.email}`} className="hover:text-stone-900 dark:hover:text-stone-100 transition-colors">
-            Email
-          </a>
-        </div>
-      </div>
+        {sep}
+        <a href={profile.github} target="_blank" rel="noopener noreferrer" className="text-item hover:opacity-70 transition-opacity">
+          GitHub
+        </a>
+        {sep}
+        <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="text-item hover:opacity-70 transition-opacity">
+          LinkedIn
+        </a>
+        {sep}
+        <Link to="/contact" className="text-item hover:opacity-70 transition-opacity">
+          Contact
+        </Link>
+      </p>
     </footer>
   );
 }

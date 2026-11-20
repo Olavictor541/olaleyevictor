@@ -1,29 +1,26 @@
-# Olaleye Victor · Portfolio
-
-Personal site of Olaleye Victor: creative technologist and Computer Science student at Vancouver Island University. Minimal, single column, light and dark themes.
+# Olaleye Victor · Personal site
 
 Live: https://olavictor541.github.io/olaleyevictor/
 
-## Stack
 React 19 · TypeScript · Vite · Tailwind CSS · React Router. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 
-## Editing content
-Projects, artworks and profile links live in **`src/data.ts`**. Add a project or artwork there and it appears on the home page and its own page. Page wording is in `src/pages/`.
+## Writing a post
+Posts are Markdown files in `src/posts/`. Copy `_template-leetcode.md` or `_template-project.md`, rename it, fill in the details at the top and remove `draft: true`. See `src/posts/README.md`.
 
-Images go in `public/`. Keep them under ~1600px on the long side and in WebP format so pages load fast.
+## Editing everything else
+`src/data.ts` holds your profile (email, links, **birth date for the age counter**), projects (Work) and artworks (Art). Images go in `public/` (project screenshots in `public/work/`).
 
 ## Pages
 | Route | Page |
 | --- | --- |
-| `/` | Intro, selected work, art preview, contact line |
-| `/about` | Bio, what I do, current roles, tools |
-| `/work` | Projects (`/work#slug` links to one) |
-| `/art` | Gallery with a full-screen viewer (arrow keys / Esc) |
-| `/contact` | Email, links, and a form that opens a pre-filled email |
+| `/` | Intro, posts (with a LeetCode tab), recent work, art |
+| `/posts`, `/posts/:slug` | All posts, and each post |
+| `/about` | Bio, photo, live age counter |
+| `/work`, `/work/:slug` | Projects shelf, and each project |
+| `/art`, `/art/:slug` | Gallery, and each piece (← → keys move between pieces) |
+| `/contact` | Email, links, message form |
 
-The theme follows the visitor's system setting until they use the toggle, then remembers their choice.
-
-`public/404.html` lets deep links like `/olaleyevictor/about` load on GitHub Pages.
+Light and dark themes follow the visitor's system setting until they use the toggle, then remember the choice. `public/404.html` lets deep links load on GitHub Pages.
 
 ## Develop
 ```bash
