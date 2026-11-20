@@ -8,6 +8,8 @@ import Builds from "./pages/Builds";
 import Crafts from "./pages/Crafts";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Posts from "./pages/Posts";
+import PostPage from "./pages/PostPage";
 
 /** Jump to the top of the page on every route change. */
 function ScrollToTop() {
@@ -30,6 +32,8 @@ export default function App() {
           <Route path="/builds" element={<Builds />} />
           <Route path="/crafts" element={<Crafts />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/posts" element={<Posts />} />
+          <Route path="/posts/:slug" element={<PostPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

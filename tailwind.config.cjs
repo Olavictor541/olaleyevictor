@@ -31,7 +31,7 @@ module.exports = {
         navhover: "var(--nav-item-hover)",
         accent: "var(--accent)",
       },
-      maxWidth: { col: "576px" },
+      maxWidth: { col: "624px" },
       borderRadius: { squircle: "16px" },
     },
   },
