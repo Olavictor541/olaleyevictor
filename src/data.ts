@@ -58,20 +58,6 @@ export const projects: Project[] = [
     links: [{ label: "Code", href: "https://github.com/Olavictor541/project101" }],
   },
   {
-    slug: "storefront-signage",
-    title: "Storefront Signage & Branding",
-    kind: "Design",
-    year: "Ongoing",
-    role: "Designer",
-    summary:
-      "Visual identities and physical storefront signage for businesses, from first sketch to print-ready artwork.",
-    points: [
-      "Logos, colour and type choices that hold together as a brand",
-      "Print-ready signage artwork made in Adobe Illustrator and Photoshop",
-    ],
-    stack: ["Illustrator", "Photoshop", "Print"],
-  },
-  {
     slug: "portfolio",
     title: "This website",
     kind: "Web",
