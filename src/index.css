@@ -1,76 +1,37 @@
-@font-face {
-  font-family: 'Impact';
-  src: url('/olaleyevictor/fonts/impact.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-tap-highlight-color: transparent;
-  }
   body {
-    @apply bg-black text-white antialiased;
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    @apply bg-stone-50 text-stone-900 antialiased dark:bg-[#0c0c0b] dark:text-stone-100;
+    font-feature-settings: "cv11", "ss01";
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
   ::selection {
-    @apply bg-orange-200 text-black;
+    @apply bg-stone-900 text-stone-50 dark:bg-stone-100 dark:text-stone-900;
   }
   :focus-visible {
-    @apply outline outline-2 outline-offset-2 outline-orange-300;
+    @apply outline outline-2 outline-offset-2 outline-stone-400 rounded-sm;
   }
 }
 
 @layer components {
-  /* Signature cream grid used behind portraits */
-  .grid-paper {
-    background-color: #ffe5b0;
-    background-image:
-      linear-gradient(0deg, #676464 1px, transparent 1px),
-      linear-gradient(90deg, #676464 1px, transparent 1px);
-    background-size: 70px 70px;
+  /* Inline text link: quiet underline that darkens on hover */
+  .link {
+    @apply underline decoration-stone-300 underline-offset-[3px] transition-colors hover:decoration-stone-900 dark:decoration-stone-600 dark:hover:decoration-stone-100;
   }
-  .grid-paper-dark {
-    background-image:
-      linear-gradient(0deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-    background-size: 70px 70px;
+  .muted {
+    @apply text-stone-500 dark:text-stone-400;
   }
-
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  .label {
+    @apply text-sm font-medium text-stone-500 dark:text-stone-400;
   }
-  .reveal-in {
-    opacity: 1;
-    transform: none;
+  .rule {
+    @apply border-stone-200 dark:border-stone-800;
   }
-
-  .marquee-track {
-    animation: marquee 30s linear infinite;
-  }
-  .float-slow {
-    animation: float 6s ease-in-out infinite;
-  }
-}
-
-@keyframes marquee {
-  to { transform: translateX(-50%); }
-}
-@keyframes float {
-  0%, 100% { translate: 0 0; }
-  50% { translate: 0 -10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .reveal { opacity: 1; transform: none; transition: none; }
-  .marquee-track, .float-slow { animation: none; }
+  * { transition: none !important; }
 }
