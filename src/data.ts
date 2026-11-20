@@ -15,7 +15,7 @@ export const profile = {
    * Date of birth as "YYYY-MM-DD". Powers the live age counter on the About page.
    * Leave empty to hide the counter.
    */
-  birthDate: "",
+  birthDate: "2003-04-08",
   /** Year this site started, for the footer. */
   since: 2025,
 };
