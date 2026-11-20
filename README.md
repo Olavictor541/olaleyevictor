@@ -1,27 +1,26 @@
-# Olaleye Victor · Portfolio
-
-Personal portfolio site: **Creative Technologist**, Computer Science student at Vancouver Island University.
+# Olaleye Victor · Personal site
 
 Live: https://olavictor541.github.io/olaleyevictor/
 
-## Stack
 React 19 · TypeScript · Vite · Tailwind CSS · React Router. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 
-## Editing content
-Almost all text lives in **`src/data.ts`**: profile links, projects (Builds page, home page and About experience), and artworks (Crafts page). Add a project or artwork there and it appears everywhere it should.
+## Writing a post
+Posts are Markdown files in `src/posts/`. Copy `_template-leetcode.md` or `_template-project.md`, rename it, fill in the details at the top and remove `draft: true`. See `src/posts/README.md`.
 
-Images go in `public/`. Keep them under ~1600px on the long side and in WebP format so pages load fast.
+## Editing everything else
+`src/data.ts` holds your profile (email, links, **birth date for the age counter**), projects (Work) and artworks (Art). Images go in `public/` (project screenshots in `public/work/`).
 
 ## Pages
 | Route | Page |
 | --- | --- |
-| `/` | Home: hero, services, featured builds, crafts preview |
-| `/about` | Bio, roles, skills, experience |
-| `/builds` | Filterable project grid (`/builds#slug` links to one project) |
-| `/crafts` | Art gallery with full-screen lightbox (arrow keys / Esc) |
-| `/contact` | Contact form (opens a pre-filled email) and social links |
+| `/` | Intro, posts (with a LeetCode tab), recent work, art |
+| `/posts`, `/posts/:slug` | All posts, and each post |
+| `/about` | Bio, photo, live age counter |
+| `/work`, `/work/:slug` | Projects shelf, and each project |
+| `/art`, `/art/:slug` | Gallery, and each piece (← → keys move between pieces) |
+| `/contact` | Email, links, message form |
 
-`public/404.html` lets deep links like `/olaleyevictor/about` load on GitHub Pages.
+Light and dark themes follow the visitor's system setting until they use the toggle, then remember the choice. `public/404.html` lets deep links load on GitHub Pages.
 
 ## Develop
 ```bash
