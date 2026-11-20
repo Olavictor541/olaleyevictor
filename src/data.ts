@@ -1,150 +1,147 @@
-// Central place for all portfolio content. Edit this file to update the site.
+// Site content. Posts live in src/posts; everything else is here.
 
 /** Resolve a file in /public against the deploy base path (e.g. /olaleyevictor/). */
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 export const profile = {
   name: "Olaleye Victor",
-  middleName: "Mobolaji",
-  title: "Creative Technologist",
-  location: "Nanaimo, BC · Canada",
+  fullName: "Olaleye Victor Mobolaji",
   school: "Vancouver Island University",
+  location: "Vancouver Island, British Columbia",
   email: "olaleyevictor541@gmail.com",
   linkedin: "https://www.linkedin.com/in/olaleye-victor/",
   github: "https://github.com/Olavictor541",
+  /**
+   * Date of birth as "YYYY-MM-DD". Powers the live age counter on the About page.
+   * Leave empty to hide the counter.
+   */
+  birthDate: "",
+  /** Year this site started, for the footer. */
+  since: 2025,
 };
 
-export type Build = {
+/* ------------------------------------------------------------------ */
+/* Work                                                                 */
+/* ------------------------------------------------------------------ */
+
+export type Project = {
   slug: string;
   title: string;
-  role: string;
+  category: "Software" | "Web";
+  date: string; // YYYY-MM, used for ordering and "Updated" text
   year: string;
-  category: "Software" | "Web" | "Design";
-  summary: string;
-  points: string[];
+  role: string;
+  /** Short line shown under the title on the detail page */
+  tagline: string;
+  /** Screenshots in /public. The first is the cover; without any, a typographic cover is drawn */
+  images?: { src: string; caption: string }[];
+  /** Paragraphs for the detail page (plain text) */
+  body: string[];
+  highlights: string[];
   stack: string[];
   links?: { label: string; href: string }[];
-  accent: string; // tailwind bg-* class used for the card swatch
+  /** Cover colour when there is no image */
+  tint: string;
 };
 
-export const builds: Build[] = [
+export const projects: Project[] = [
   {
     slug: "viu-meets",
     title: "VIU Meets",
-    role: "Systems Architecture & Development",
+    category: "Software",
+    date: "2026-03",
     year: "2026",
-    category: "Software",
-    summary:
-      "An event discovery platform for the VIU community, planned and built from the ground up: from domain models to a working proof-of-concept database.",
-    points: [
-      "Architected the platform end to end, handling both structural planning and execution",
-      "Designed the core architecture with domain class models and system sequence diagrams to map user interactions",
-      "Built a proof-of-concept database to handle complex backend relationships and user data securely",
+    role: "Systems architecture & development",
+    tagline: "Event discovery for the VIU community",
+    body: [
+      "VIU Meets is an event discovery platform for students at Vancouver Island University: one place to find out what's happening on campus and who's going.",
+      "I worked on it from the very first diagrams to a working proof of concept, handling both the structural planning and the build.",
     ],
-    stack: ["System Design", "UML", "SQL", "Full-Stack"],
-    accent: "bg-orange-400",
-  },
-  {
-    slug: "secure-auth-dashboard",
-    title: "Secure Auth Dashboard",
-    role: "Frontend & Security",
-    year: "2025",
-    category: "Web",
-    summary:
-      "A learning project exploring secure frontend authentication: login flows, protected views and a dashboard interface.",
-    points: [
-      "Built the sign-in flow and dashboard interface",
-      "Explored security practices for handling user input and credentials on the client",
-      "Designed a clean, responsive layout",
+    highlights: [
+      "Modelled the domain with class diagrams and system sequence diagrams to map how people actually use it",
+      "Designed the core technical architecture",
+      "Built a proof-of-concept database for the backend relationships and user data",
     ],
-    stack: ["JavaScript", "CSS", "Auth", "Security"],
-    links: [{ label: "Source", href: "https://github.com/Olavictor541/project101" }],
-    accent: "bg-red-500",
-  },
-  {
-    slug: "restaurant-staff",
-    title: "Restaurant Staff Manager",
-    role: "C++ Developer",
-    year: "2025",
-    category: "Software",
-    summary:
-      "A modular console application that manages staff hierarchies and mentorship pairings across multiple employee levels.",
-    points: [
-      "Modelled the staff hierarchy with strict OOP: inheritance and abstraction for a scalable codebase",
-      "Implemented hash maps to make mentor–mentee lookups dramatically faster",
-      "Kept modules decoupled so new roles can be added without rewriting core logic",
-    ],
-    stack: ["C++", "OOP", "Data Structures"],
-    accent: "bg-teal-500",
-  },
-  {
-    slug: "lore-website",
-    title: "Lore Website",
-    role: "Frontend Developer",
-    year: "2025",
-    category: "Web",
-    summary:
-      "A collaborative storytelling website. I led UI development and the responsiveness strategy for the team.",
-    points: [
-      "Led UI development with a modern frontend architecture",
-      "Engineered a flexible layout system so the interface scales across every device",
-      "Translated wireframes into high-fidelity, working pages",
-    ],
-    stack: ["HTML", "CSS", "JavaScript", "Responsive Design"],
-    accent: "bg-purple-500",
+    stack: ["System design", "UML", "SQL"],
+    tint: "oklch(0.86 0.06 125)",
   },
   {
     slug: "portfolio",
-    title: "This Portfolio",
-    role: "Design & Development",
-    year: "2026",
+    title: "This website",
     category: "Web",
-    summary:
-      "The site you're on: designed and built by me as a single place for my code, research and art.",
-    points: [
-      "Built with React, TypeScript, Vite and Tailwind CSS",
-      "Deployed automatically to GitHub Pages with GitHub Actions",
-      "Optimized images and responsive layouts for fast loads on mobile",
+    date: "2026-11",
+    year: "2026",
+    role: "Design & development",
+    tagline: "My corner of the web",
+    images: [
+      { src: "work/portfolio.webp", caption: "The home page in light mode" },
+      { src: "work/portfolio-dark.webp", caption: "And in dark mode" },
     ],
-    stack: ["React", "TypeScript", "Tailwind", "Vite"],
+    body: [
+      "I designed and built this site to keep my posts, projects and art in one place. It's a React and TypeScript app built with Vite and styled with Tailwind CSS.",
+      "Posts are plain Markdown files, so writing up a LeetCode problem or a project is as simple as adding a file. It has light and dark themes, works on phones, and deploys to GitHub Pages automatically whenever I push.",
+    ],
+    highlights: [
+      "Markdown-powered posts with syntax-highlighted code",
+      "Light and dark themes that follow your system setting",
+      "Automatic deploys with GitHub Actions",
+    ],
+    stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
     links: [
-      { label: "Source", href: "https://github.com/Olavictor541/olaleyevictor" },
-      { label: "Live", href: "https://olavictor541.github.io/olaleyevictor/" },
+      { label: "Code", href: "https://github.com/Olavictor541/olaleyevictor" },
     ],
-    accent: "bg-lime-400",
+    tint: "oklch(0.9 0.04 70)",
   },
   {
-    slug: "storefront-signage",
-    title: "Storefront Signage & Branding",
-    role: "Commercial Designer",
-    year: "Ongoing",
-    category: "Design",
-    summary:
-      "Visual identities and physical storefront signage for local businesses, taking each brand from first sketch to installation-ready artwork.",
-    points: [
-      "Developed logos, colour systems and brand guidelines for small businesses",
-      "Produced print-ready signage artwork in the Adobe Creative Suite",
-      "Worked directly with owners to turn a rough idea into a finished storefront",
+    slug: "secure-auth-dashboard",
+    title: "Secure Personal Dashboard",
+    category: "Web",
+    date: "2026-04",
+    year: "2026",
+    role: "Frontend & security",
+    tagline: "The frontend of a real product, not a landing page",
+    images: [
+      { src: "work/secure-auth.webp", caption: "The dashboard, after signing in" },
+      { src: "work/secure-auth-login.webp", caption: "The sign-in screen" },
     ],
-    stack: ["Illustrator", "Photoshop", "Branding", "Print"],
-    accent: "bg-yellow-400",
+    body: [
+      "A secure, responsive personal dashboard where a user can log in, see their data, work with forms and log out safely. I'm building it in stages to relearn the fundamentals properly: first the interface, then the logic, then the security.",
+      "It's written in semantic HTML, Tailwind CSS and plain JavaScript, with no framework, so every piece of behaviour is something I wrote and understand. The plan is to move the same project to React and TypeScript next.",
+    ],
+    highlights: [
+      "Sign-in form with client-side validation and error states",
+      "Simulated session token stored in localStorage, with protected pages that send you back to sign in",
+      "Dashboard layout with a sidebar, search, summary cards and a sign-out flow",
+      "Responsive layout for phones and desktops",
+    ],
+    stack: ["HTML", "Tailwind CSS", "JavaScript"],
+    links: [{ label: "Code", href: "https://github.com/Olavictor541/project101" }],
+    tint: "oklch(0.88 0.05 230)",
   },
 ];
 
+export const projectBySlug = (slug: string) => projects.find((p) => p.slug === slug);
+
+/* ------------------------------------------------------------------ */
+/* Art                                                                  */
+/* ------------------------------------------------------------------ */
+
 export type Artwork = {
-  id: number;
+  slug: string;
   title: string;
-  medium: string;
+  medium: "Mixed media collage" | "Graphite on paper";
   image: string;
   width: number;
   height: number;
 };
 
 export const artworks: Artwork[] = [
-  { id: 1, title: "Mindless #1", medium: "Mixed media collage", image: "m3.webp", width: 1279, height: 1600 },
-  { id: 2, title: "Transformation: A far above mentality", medium: "Mixed media collage", image: "m2.webp", width: 1199, height: 1600 },
-  { id: 3, title: "The Mind of Christ: A superior belief system", medium: "Mixed media collage", image: "m4.webp", width: 1335, height: 1600 },
-  { id: 4, title: "The Seeing Eyes", medium: "Graphite on paper", image: "m6.webp", width: 1264, height: 1600 },
-  { id: 5, title: "Elevation: A higher calling #1", medium: "Mixed media collage", image: "m5.webp", width: 1242, height: 1600 },
-  { id: 6, title: "Untitled", medium: "Graphite on paper", image: "m7.webp", width: 1080, height: 1376 },
+  { slug: "mindless", title: "Mindless #1", medium: "Mixed media collage", image: "m3.webp", width: 1279, height: 1600 },
+  { slug: "transformation", title: "Transformation: A far above mentality", medium: "Mixed media collage", image: "m2.webp", width: 1199, height: 1600 },
+  { slug: "the-mind-of-christ", title: "The Mind of Christ: A superior belief system", medium: "Mixed media collage", image: "m4.webp", width: 1335, height: 1600 },
+  { slug: "the-seeing-eyes", title: "The Seeing Eyes", medium: "Graphite on paper", image: "m6.webp", width: 1264, height: 1600 },
+  { slug: "elevation", title: "Elevation: A higher calling #1", medium: "Mixed media collage", image: "m5.webp", width: 1242, height: 1600 },
+  { slug: "untitled", title: "Untitled", medium: "Graphite on paper", image: "m7.webp", width: 1080, height: 1376 },
 ];
+
+export const artBySlug = (slug: string) => artworks.find((a) => a.slug === slug);
