@@ -1,6 +1,6 @@
 // Site content. Posts live in src/posts; everything else is here.
 
-/** Resolve a file in /public against the deploy base path (e.g. /olaleyevictor/). */
+/** Resolve a file in /public against the deploy base path ("/" on olaleyevictor.com). */
 export const asset = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\//, "")}`;
 
 export const profile = {
