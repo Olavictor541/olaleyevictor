@@ -1,6 +1,6 @@
 # Olaleye Victor · Personal site
 
-Live: https://olavictor541.github.io/olaleyevictor/
+Live: https://olaleyevictor.com
 
 React 19 · TypeScript · Vite · Tailwind CSS · React Router. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 

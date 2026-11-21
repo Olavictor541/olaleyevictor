@@ -13,4 +13,4 @@ Mostly that means two things:
 - **LeetCode problems.** The ones that took me a while, with the approach that finally clicked, the time and space complexity, and my solution.
 - **Projects.** What I'm building, the decisions behind it, and what I learned along the way.
 
-Writing things down makes me understand them better, and it's nice to be able to look back and see progress. If something here is useful to you, or you spot a better solution, [send me a message](/olaleyevictor/contact).
+Writing things down makes me understand them better, and it's nice to be able to look back and see progress. If something here is useful to you, or you spot a better solution, [send me a message](/contact).
