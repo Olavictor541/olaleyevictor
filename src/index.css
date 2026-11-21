@@ -127,6 +127,10 @@
     padding-left: 1em;
     color: var(--intro);
   }
+  .prose-body code {
+    font-variant-ligatures: none;
+    font-feature-settings: "liga" 0, "calt" 0;
+  }
   .prose-body :not(pre) > code {
     @apply font-mono;
     font-size: 0.8em;
