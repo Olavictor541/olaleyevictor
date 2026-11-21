@@ -6,20 +6,48 @@ import { profile } from "../data";
 export default function Contact() {
   usePageTitle("Contact");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "activate" | "error">("idle");
   const [copied, setCopied] = useState(false);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
 
-  // The site is static, so the form opens the visitor's email app with everything filled in.
-  const onSubmit = (e: FormEvent) => {
+  // The site has no server of its own, so messages go through FormSubmit (formsubmit.co),
+  // a free service that forwards form submissions to my inbox. The very first message
+  // sends me an activation email; until I click it, messages are held.
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const subject = `Hello from ${form.name}`;
-    const body = `${form.message}\n\n${form.name}\n${form.email}`;
-    window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    const honey = new FormData(e.currentTarget).get("_honey");
+    if (honey) return; // a bot filled in the hidden field
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          _subject: `Website message from ${form.name}`,
+          _template: "table",
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && String(data.success) === "true") {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else if (/activat/i.test(String(data.message ?? ""))) {
+        setStatus("activate");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
+
+  // Backup: open the visitor's own email app with the message filled in
+  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(`Hello from ${form.name || "your website"}`)}&body=${encodeURIComponent(form.message)}`;
 
   const copy = async () => {
     try {
@@ -59,6 +87,8 @@ export default function Contact() {
       </div>
 
       <form onSubmit={onSubmit} className="mt-12 flex flex-col gap-3">
+        {/* Hidden from people; bots tend to fill it in */}
+        <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
         <h2 className="font-display text-[22px] font-semibold text-title mb-2">Send a message</h2>
         <div className="grid sm:grid-cols-2 gap-3">
           <input name="name" aria-label="Name" placeholder="Name" autoComplete="name" required value={form.name} onChange={onChange} className={field} />
@@ -68,12 +98,20 @@ export default function Contact() {
         <div className="flex flex-wrap items-center gap-4 mt-1">
           <button
             type="submit"
-            className="rounded-md bg-accent px-6 py-2.5 font-sans text-[15px] font-semibold text-accentink hover:opacity-90 transition-opacity"
+            disabled={status === "sending"}
+            className="rounded-md bg-accent px-6 py-2.5 font-sans text-[15px] font-semibold text-accentink hover:opacity-90 transition-opacity disabled:opacity-60"
           >
-            Send
+            {status === "sending" ? "Sending…" : "Send"}
           </button>
           <p aria-live="polite" className="font-sans text-[15px] font-medium text-faint">
-            {sent && "Your email app should open with the message ready to send."}
+            {status === "sent" && "Thanks! Your message is on its way to me."}
+            {status === "activate" && "Message received. I'll see it as soon as my inbox finishes setting up."}
+            {status === "error" && (
+              <>
+                That didn't go through. Please{" "}
+                <a href={mailtoHref} className="link">email me directly</a> instead.
+              </>
+            )}
           </p>
         </div>
       </form>

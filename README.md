@@ -4,6 +4,9 @@ Live: https://olaleyevictor.com
 
 React 19 · TypeScript · Vite · Tailwind CSS · React Router. Deployed to GitHub Pages by `.github/workflows/deploy.yml` on every push to `main`.
 
+## Guide
+See **[GUIDE.md](GUIDE.md)** for adding posts and art, how the site works, and fixing common problems.
+
 ## Writing a post
 Posts are Markdown files in `src/posts/`. Copy `_template-leetcode.md` or `_template-project.md`, rename it, fill in the details at the top and remove `draft: true`. See `src/posts/README.md`.
 
