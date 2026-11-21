@@ -17,7 +17,7 @@ export function Carousel({
   title: ReactNode;
   to?: string;
   extra?: ReactNode; // shown beside the title, e.g. "View all"
-  aside?: ReactNode; // shown under the title, e.g. "Updated …"
+  aside?: ReactNode; // shown under the title
   children: ReactNode;
 }) {
   const track = useRef<HTMLDivElement>(null);
@@ -70,17 +70,18 @@ export function Carousel({
   );
 }
 
-/** Drawn cover for projects without a screenshot. */
+/** Drawn cover for projects without a screenshot: cream graph paper with the title. */
 export function WorkCover({ project, large = false }: { project: Project; large?: boolean }) {
   return (
-    <div
-      className="w-full h-full flex flex-col justify-between p-[12%] text-[oklch(0.3_0.03_100)]"
-      style={{ background: project.tint }}
-    >
-      <span className={`font-sans font-semibold uppercase tracking-[0.12em] opacity-60 ${large ? "text-sm" : "text-[10px]"}`}>
+    <div className="grid-paper w-full h-full flex flex-col justify-between p-[11%] text-[#2b2520]">
+      <span
+        className={`self-start rounded bg-[#2b2520] px-1.5 py-0.5 font-sans font-bold uppercase tracking-[0.12em] text-[#ffe5b0] ${
+          large ? "text-xs" : "text-[9px]"
+        }`}
+      >
         {project.category}
       </span>
-      <span className={`font-serif font-semibold leading-[1.05] ${large ? "text-5xl" : "text-[22px]"}`}>
+      <span className={`font-display font-semibold leading-[1.05] ${large ? "text-5xl" : "text-[22px]"}`}>
         {project.title}
       </span>
     </div>
@@ -92,7 +93,7 @@ export function WorkCard({ project, showCategory = true }: { project: Project; s
   const cover = project.images?.[0];
   return (
     <Link to={`/work/${project.slug}`} className="group block w-[44%] sm:w-[calc((100%-54px)/3)] shrink-0 snap-start">
-      <div className="aspect-square overflow-hidden rounded-xl bg-card ring-1 ring-[color:var(--line)] group-hover:ring-4 group-hover:ring-[color:var(--well)] transition-all duration-200">
+      <div className="aspect-square overflow-hidden rounded-lg bg-card border border-line group-hover:border-[color:var(--accent)] transition-colors duration-200">
         {cover ? (
           <img
             src={asset(cover.src)}
@@ -106,11 +107,14 @@ export function WorkCard({ project, showCategory = true }: { project: Project; s
           </div>
         )}
       </div>
-      <p className="mt-3 font-sans text-[16px] leading-5 font-medium text-faint truncate">
-        {showCategory && <span className="font-semibold text-item">{project.category}</span>}
-        {showCategory && " / "}
-        <span className={showCategory ? "" : "text-item"}>{project.title}</span>
+      <p className="mt-3 font-display text-[16.5px] leading-5 font-semibold text-item truncate group-hover:text-accent transition-colors">
+        {project.title}
       </p>
+      {showCategory && (
+        <p className="mt-1 font-sans text-[12px] font-bold uppercase tracking-[0.12em] text-faint">
+          {project.category} · {project.year}
+        </p>
+      )}
     </Link>
   );
 }
@@ -120,7 +124,7 @@ export function ArtCard({ art, fluid = false }: { art: Artwork; fluid?: boolean 
   return (
     <Link
       to={`/art/${art.slug}`}
-      className={`group relative block overflow-hidden rounded-xl bg-white aspect-[174/224] ${
+      className={`group relative block overflow-hidden rounded-lg bg-white aspect-[174/224] ${
         fluid ? "w-full" : "w-[44%] sm:w-[calc((100%-54px)/3)] shrink-0 snap-start"
       }`}
     >
@@ -131,7 +135,7 @@ export function ArtCard({ art, fluid = false }: { art: Artwork; fluid?: boolean 
         className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
       />
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
-      <span className="absolute left-5 right-4 bottom-5 font-sans text-[17px] leading-[1.15] font-semibold text-white">
+      <span className="absolute left-4 right-3 bottom-4 font-display text-[17px] leading-[1.15] font-semibold text-white">
         {art.title.replace(/:.*$/, "")}
       </span>
     </Link>

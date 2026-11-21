@@ -4,45 +4,51 @@
 
 /* Colour tokens. Light is a warm cream; dark is a deep olive. */
 :root {
-  --bg: #f7f2ed;
-  --title: oklch(0.374 0.01 67.558);
-  --text: rgba(87, 83, 78, 0.9);
-  --intro: rgba(139, 129, 122, 0.9);
-  --item: oklab(0.374 0.0038 0.0092 / 0.75);
-  --sub: oklch(0.553 0.013 58.071 / 0.6);
-  --faint: oklab(0.709 0.0056 0.0083 / 0.75);
-  --caption: oklab(0.553 0.0069 0.011 / 0.75);
-  --link: oklch(0.444 0.011 73.639);
-  --link-deco: oklch(0.709 0.01 56.259 / 0.3);
-  --line: oklch(0.9 0.012 70);
-  --well: oklch(0.94 0.01 70);
-  --card: #ffffff;
-  --nav-bg: oklch(0.93 0.018 80 / 0.7);
-  --nav-item: oklch(0.75 0.03 80 / 0.85);
-  --nav-item-hover: oklch(0.55 0.03 80);
-  --accent: oklch(0.45 0.12 125);
-  --code-bg: oklch(0.94 0.01 70);
+  /* Light: warm paper with a faint graph-paper grid, terracotta accent */
+  --bg: #f6f0e6;
+  --grid: rgba(120, 95, 60, 0.055);
+  --title: #2b2520;
+  --text: rgba(58, 50, 43, 0.88);
+  --intro: rgba(95, 84, 74, 0.9);
+  --item: #3a322b;
+  --sub: rgba(110, 98, 86, 0.8);
+  --faint: rgba(140, 126, 112, 0.85);
+  --caption: rgba(110, 98, 86, 0.85);
+  --link: #2b2520;
+  --link-deco: rgba(193, 90, 48, 0.45);
+  --line: rgba(120, 95, 60, 0.18);
+  --well: rgba(120, 95, 60, 0.08);
+  --card: #fffdf9;
+  --nav-bg: rgba(255, 252, 246, 0.75);
+  --nav-item: rgba(110, 98, 86, 0.75);
+  --nav-item-hover: #2b2520;
+  --accent: #c15a30;
+  --accent-ink: #fffaf3;
+  --code-bg: rgba(120, 95, 60, 0.08);
   color-scheme: light;
 }
 .dark {
-  --bg: oklch(0.185 0.1 120);
-  --title: oklch(0.93 0.012 140);
-  --text: oklch(0.85 0.012 140 / 0.9);
-  --intro: oklch(0.8 0.015 140 / 0.8);
-  --item: oklch(0.89 0.012 145 / 0.85);
-  --sub: oklch(0.75 0.02 140 / 0.6);
-  --faint: oklch(0.65 0.02 140 / 0.6);
-  --caption: oklch(0.72 0.02 140 / 0.7);
-  --link: oklch(0.89 0.012 145);
-  --link-deco: oklch(0.45 0.025 125 / 0.75);
-  --line: oklch(0.28 0.06 122);
-  --well: oklch(0.22 0.08 121);
-  --card: oklch(0.25 0.06 122);
-  --nav-bg: oklch(0.23 0.07 122 / 0.8);
-  --nav-item: oklch(0.75 0.03 145 / 0.85);
-  --nav-item-hover: oklch(0.9 0.02 145);
-  --accent: oklch(0.62 0.12 125);
-  --code-bg: oklch(0.22 0.08 121);
+  /* Dark: warm ink, like a sketchbook at night */
+  --bg: #15120f;
+  --grid: rgba(255, 235, 210, 0.03);
+  --title: #f2e9dc;
+  --text: rgba(232, 222, 208, 0.82);
+  --intro: rgba(214, 202, 186, 0.75);
+  --item: #ece2d4;
+  --sub: rgba(200, 186, 168, 0.65);
+  --faint: rgba(180, 166, 148, 0.6);
+  --caption: rgba(200, 186, 168, 0.7);
+  --link: #f2e9dc;
+  --link-deco: rgba(232, 140, 95, 0.5);
+  --line: rgba(255, 235, 210, 0.12);
+  --well: rgba(255, 235, 210, 0.06);
+  --card: #201b16;
+  --nav-bg: rgba(32, 27, 22, 0.8);
+  --nav-item: rgba(200, 186, 168, 0.65);
+  --nav-item-hover: #f2e9dc;
+  --accent: #e8875a;
+  --accent-ink: #1a1410;
+  --code-bg: rgba(255, 235, 210, 0.06);
   color-scheme: dark;
 }
 
@@ -53,10 +59,15 @@
   body {
     @apply bg-page font-sans antialiased;
     color: var(--title);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
     font-optical-sizing: auto;
   }
   ::selection {
-    background: oklch(0.85 0.08 125 / 0.5);
+    background: rgba(193, 90, 48, 0.25);
   }
   :focus-visible {
     outline: 2px solid var(--accent);
@@ -90,12 +101,12 @@
     margin-top: 1.25em;
   }
   .prose-body h2 {
-    @apply font-serif text-title font-semibold;
+    @apply font-display text-title font-semibold;
     font-size: 1.15em;
     margin-top: 2em;
   }
   .prose-body h3 {
-    @apply font-serif text-title font-semibold;
+    @apply font-display text-title font-semibold;
     margin-top: 1.6em;
   }
   .prose-body h2 + *,
@@ -150,28 +161,53 @@
   .prose-body img {
     border-radius: 12px;
   }
+  .prose-body table {
+    @apply font-sans;
+    font-size: 15px;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .prose-body th,
+  .prose-body td {
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 0.75rem 0.5rem 0;
+    text-align: left;
+  }
+  .prose-body th {
+    @apply font-semibold text-title;
+  }
   .prose-body hr {
     border-color: var(--line);
   }
 
   /* Small rounded label, e.g. a category */
   .pill {
-    @apply inline-flex items-center rounded-full px-3 py-0.5 font-sans text-[15px] font-medium;
+    @apply inline-flex items-center rounded-md px-2.5 py-0.5 font-sans text-[13px] font-semibold tracking-wide;
     background: var(--well);
     color: var(--caption);
   }
 }
 
 /* Syntax colours for code blocks (highlight.js classes) */
-.hljs-keyword, .hljs-built_in, .hljs-type { color: oklch(0.5 0.12 125); }
-.hljs-string, .hljs-attr { color: oklch(0.52 0.1 60); }
-.hljs-number, .hljs-literal { color: oklch(0.55 0.12 30); }
+.hljs-keyword, .hljs-built_in, .hljs-type { color: #b0482a; }
+.hljs-string, .hljs-attr { color: #6b7a2e; }
+.hljs-number, .hljs-literal { color: #9a5a12; }
 .hljs-comment { color: var(--faint); font-style: italic; }
-.hljs-title, .hljs-title.function_ { color: oklch(0.45 0.08 250); }
-.dark .hljs-keyword, .dark .hljs-built_in, .dark .hljs-type { color: oklch(0.8 0.12 125); }
-.dark .hljs-string, .dark .hljs-attr { color: oklch(0.82 0.08 70); }
-.dark .hljs-number, .dark .hljs-literal { color: oklch(0.8 0.1 40); }
-.dark .hljs-title, .dark .hljs-title.function_ { color: oklch(0.82 0.06 230); }
+.hljs-title, .hljs-title.function_ { color: #2f5d7c; }
+.dark .hljs-keyword, .dark .hljs-built_in, .dark .hljs-type { color: #f0976c; }
+.dark .hljs-string, .dark .hljs-attr { color: #c5d08a; }
+.dark .hljs-number, .dark .hljs-literal { color: #e8b86a; }
+.dark .hljs-title, .dark .hljs-title.function_ { color: #8fc0e0; }
+
+/* His original cream graph paper, used behind portraits and covers */
+.grid-paper {
+  background-color: #ffe5b0;
+  background-image:
+    linear-gradient(0deg, rgba(103, 100, 100, 0.55) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(103, 100, 100, 0.55) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
 
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }

@@ -28,7 +28,7 @@ export default function Posts() {
         />
       </div>
       <div className="mt-10">
-        <PostList posts={shown} showDate />
+        <PostList posts={shown} showYear />
       </div>
       <p className="mt-10 font-sans text-[16px] font-medium text-faint">
         {shown.length} {shown.length === 1 ? "post" : "posts"}

@@ -1,16 +1,23 @@
 import type { ComponentType } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { HiComputerDesktop, HiHome, HiMoon, HiPaintBrush, HiSun, HiUser } from "react-icons/hi2";
+import {
+  HiOutlineComputerDesktop,
+  HiOutlineHome,
+  HiOutlineMoon,
+  HiOutlinePaintBrush,
+  HiOutlineSun,
+  HiOutlineUser,
+} from "react-icons/hi2";
 import { Logo } from "./Logo";
 import { useTheme } from "./useTheme";
 
 type Item = { name: string; path: string; Icon: ComponentType<{ className?: string }> };
 
 const items: Item[] = [
-  { name: "Home", path: "/", Icon: HiHome },
-  { name: "About", path: "/about", Icon: HiUser },
-  { name: "Work", path: "/work", Icon: HiComputerDesktop },
-  { name: "Art", path: "/art", Icon: HiPaintBrush },
+  { name: "Home", path: "/", Icon: HiOutlineHome },
+  { name: "About", path: "/about", Icon: HiOutlineUser },
+  { name: "Work", path: "/work", Icon: HiOutlineComputerDesktop },
+  { name: "Art", path: "/art", Icon: HiOutlinePaintBrush },
 ];
 
 /** Which section a URL belongs to (so /work/viu-meets keeps "Work" active, /posts keeps "Home"). */
@@ -30,18 +37,14 @@ function NavItem({ item, active, vertical }: { item: Item; active: boolean; vert
       title={item.name}
       aria-label={item.name}
       aria-current={active ? "page" : undefined}
-      className={`group/link relative z-10 flex items-center justify-center rounded-squircle transition-colors duration-200 ${
-        vertical ? "w-[44px] h-[44px]" : "w-12 sm:w-[52px] h-[44px]"
-      } ${
-        active
-          ? "bg-white text-accent shadow-[0_1px_2px_rgba(60,50,30,0.08),0_2px_8px_rgba(60,50,30,0.06)]"
-          : "text-navitem hover:text-navhover"
+      className={`group/link relative z-10 grid place-items-center rounded-full w-11 h-11 transition-colors duration-200 ${
+        active ? "bg-accent text-accentink" : "text-navitem hover:text-navhover hover:bg-well"
       }`}
     >
-      <Icon className="w-[21px] h-[21px] transition-transform duration-300 ease-out group-hover/link:scale-110" />
-      {/* Hover label, to the right of the icon (desktop sidebar only) */}
+      <Icon className="w-[20px] h-[20px]" />
+      {/* Label slides out to the right on hover (desktop rail only) */}
       {vertical && (
-        <span className="pointer-events-none absolute left-full ml-6 whitespace-nowrap font-sans text-base font-medium text-navitem opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0">
+        <span className="pointer-events-none absolute left-full ml-5 whitespace-nowrap rounded-md bg-[color:var(--title)] px-2 py-1 font-sans text-[13px] font-semibold text-page opacity-0 -translate-x-1 transition-all duration-200 group-hover/link:opacity-100 group-hover/link:translate-x-0">
           {item.name}
         </span>
       )}
@@ -56,13 +59,9 @@ function ThemeButton() {
       onClick={toggle}
       aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
       title={dark ? "Light theme" : "Dark theme"}
-      className="group/t w-[44px] h-[44px] grid place-items-center rounded-squircle text-navitem hover:text-navhover transition-colors"
+      className="w-11 h-11 grid place-items-center rounded-full text-navitem hover:text-navhover hover:bg-well transition-colors"
     >
-      {dark ? (
-        <HiMoon className="w-[19px] h-[19px] transition-transform duration-300 group-hover/t:-rotate-12" />
-      ) : (
-        <HiSun className="w-[21px] h-[21px] transition-transform duration-500 group-hover/t:rotate-45" />
-      )}
+      {dark ? <HiOutlineSun className="w-[20px] h-[20px]" /> : <HiOutlineMoon className="w-[19px] h-[19px]" />}
     </button>
   );
 }
@@ -73,36 +72,35 @@ export default function SiteNav() {
 
   return (
     <>
-      {/* ---------- Desktop: logo top-left, floating vertical icon bar ---------- */}
-      <div className="hidden lg:block">
-        <Link
-          to="/"
-          aria-label="Olaleye Victor, home"
-          className="fixed z-40 top-10 left-[46px] w-12 h-12 grid place-items-center text-title hover:opacity-70 transition-opacity"
-        >
-          <Logo className="w-10 h-10" />
+      {/* ---------- Desktop: logo top-left, slim rail down the left edge ---------- */}
+      <div className="hidden lg:flex fixed z-40 top-9 left-10 flex-col items-center gap-8">
+        <Link to="/" aria-label="Olaleye Victor, home" className="text-title hover:text-accent transition-colors">
+          <Logo className="w-11 h-11" />
         </Link>
-        <div className="fixed z-40 left-[43px] top-[152px] flex flex-col items-center gap-3">
-          <nav aria-label="Main" className="flex flex-col items-center gap-1 p-[5px] rounded-[18px] bg-navbg backdrop-blur">
-            {items.map((item) => (
-              <NavItem key={item.path} item={item} active={current === item.path} vertical />
-            ))}
-          </nav>
+        <nav
+          aria-label="Main"
+          className="flex flex-col items-center gap-1.5 p-1.5 rounded-full border border-line bg-navbg backdrop-blur"
+        >
+          {items.map((item) => (
+            <NavItem key={item.path} item={item} active={current === item.path} vertical />
+          ))}
+          <span className="my-1 h-px w-6 bg-[color:var(--line)]" aria-hidden="true" />
           <ThemeButton />
-        </div>
+        </nav>
       </div>
 
-      {/* ---------- Phones and tablets: logo, horizontal icon bar, theme ---------- */}
+      {/* ---------- Phones and tablets: logo left, capsule bar right ---------- */}
       <header className="lg:hidden w-full max-w-col mx-auto px-6 pt-6 flex items-center justify-between gap-3">
         <Link to="/" aria-label="Olaleye Victor, home" className="text-title shrink-0">
           <Logo className="w-9 h-9" />
         </Link>
-        <nav aria-label="Main" className="flex items-center p-[4px] rounded-[18px] bg-navbg">
+        <nav aria-label="Main" className="flex items-center gap-0.5 p-1 rounded-full border border-line bg-navbg">
           {items.map((item) => (
             <NavItem key={item.path} item={item} active={current === item.path} vertical={false} />
           ))}
+          <span className="mx-0.5 w-px h-6 bg-[color:var(--line)]" aria-hidden="true" />
+          <ThemeButton />
         </nav>
-        <ThemeButton />
       </header>
     </>
   );

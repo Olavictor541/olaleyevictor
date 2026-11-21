@@ -6,7 +6,7 @@ export function useTheme() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", dark);
-    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#0f1503" : "#f7f2ed");
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#15120f" : "#f6f0e6");
   }, [dark]);
 
   // Follow the system setting until the visitor picks a theme themselves

@@ -5,12 +5,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // Reading text, names and titles
-        serif: ['"Source Serif 4"', "ui-serif", "Georgia", "serif"],
-        // Labels, navigation, captions
-        sans: ['"Figtree"', "ui-sans-serif", "system-ui", "sans-serif"],
-        // Subtitles under list items
-        sub: ['"Source Sans 3"', "ui-sans-serif", "system-ui", "sans-serif"],
+        // Headings: a soft, slightly playful serif
+        display: ['"Fraunces"', "ui-serif", "Georgia", "serif"],
+        // Reading text
+        serif: ['"Newsreader"', "ui-serif", "Georgia", "serif"],
+        // Labels, navigation, captions, subtitles
+        sans: ['"Manrope"', "ui-sans-serif", "system-ui", "sans-serif"],
+        sub: ['"Manrope"', "ui-sans-serif", "system-ui", "sans-serif"],
         mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"],
       },
       colors: {
@@ -30,6 +31,7 @@ module.exports = {
         navitem: "var(--nav-item)",
         navhover: "var(--nav-item-hover)",
         accent: "var(--accent)",
+        accentink: "var(--accent-ink)",
       },
       maxWidth: { col: "624px" },
       borderRadius: { squircle: "16px" },

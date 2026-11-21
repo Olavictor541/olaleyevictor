@@ -32,7 +32,7 @@ export default function ArtDetail() {
   if (!art) return <NotFound />;
   const sameMedium = artworks.filter((a) => a.slug !== art.slug && a.medium === art.medium);
 
-  const step = "w-10 h-10 grid place-items-center rounded-full border-2 border-line text-item hover:bg-well transition-colors";
+  const step = "w-9 h-9 grid place-items-center rounded-md border border-line text-item hover:border-[color:var(--accent)] hover:text-accent transition-colors";
 
   return (
     <Page>
@@ -42,7 +42,7 @@ export default function ArtDetail() {
       </div>
 
       <figure className="mt-12">
-        <div className="overflow-hidden rounded-xl bg-white">
+        <div className="overflow-hidden rounded-lg bg-white">
           <img src={asset(art.image)} alt={art.title} width={art.width} height={art.height} className="w-full h-auto" />
         </div>
         <div className="flex items-start justify-between gap-4">
@@ -74,7 +74,7 @@ export default function ArtDetail() {
 
       {sameMedium.length > 0 && (
         <div className="mt-16">
-          <Carousel title={art.medium === "Graphite on paper" ? "More graphite" : "More collage"} to="/art">
+          <Carousel title={art.medium === "Graphite on paper" ? "Other graphite pieces" : "Other collages"} to="/art">
             {sameMedium.map((a) => (
               <ArtCard key={a.slug} art={a} />
             ))}

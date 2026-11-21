@@ -20,7 +20,7 @@ export default function PostPage() {
   return (
     <Page>
       <PageHeader title={post.title} subtitle={post.subtitle}>
-        <p className="font-sans text-[18.4px] leading-7 font-medium tracking-[-0.015em] text-faint">{formatDate(post.date)}</p>
+        <p className="font-mono text-[13px] text-faint">{formatDate(post.date)}</p>
       </PageHeader>
 
       <div className="mt-5 flex flex-wrap items-center gap-2">
@@ -60,7 +60,7 @@ export default function PostPage() {
 
       {more.length > 0 && (
         <section className="mt-16">
-          <SectionTitle to="/posts">More posts</SectionTitle>
+          <SectionTitle to="/posts">Keep reading</SectionTitle>
           <PostList posts={more} />
         </section>
       )}

@@ -32,11 +32,11 @@ export default function Contact() {
   };
 
   const field =
-    "w-full rounded-xl border border-line bg-well px-4 py-3 font-sub text-[18px] text-title placeholder:text-faint focus:outline-none focus:border-[color:var(--accent)] transition-colors";
+    "w-full rounded-md border border-line bg-card px-4 py-3 font-sans text-[16px] text-title placeholder:text-faint focus:outline-none focus:border-[color:var(--accent)] transition-colors";
 
   return (
     <Page>
-      <PageHeader title="Contact" subtitle="Say hello. I read everything." />
+      <PageHeader title="Contact" subtitle="Questions, projects, commissions or just hello." />
 
       <div className="prose-body mt-10">
         <p>
@@ -59,7 +59,7 @@ export default function Contact() {
       </div>
 
       <form onSubmit={onSubmit} className="mt-12 flex flex-col gap-3">
-        <h2 className="font-sans text-[20px] leading-[30px] font-medium tracking-[-0.03em] text-item mb-2">Send a message</h2>
+        <h2 className="font-display text-[22px] font-semibold text-title mb-2">Send a message</h2>
         <div className="grid sm:grid-cols-2 gap-3">
           <input name="name" aria-label="Name" placeholder="Name" autoComplete="name" required value={form.name} onChange={onChange} className={field} />
           <input name="email" aria-label="Email" placeholder="Email" type="email" autoComplete="email" required value={form.email} onChange={onChange} className={field} />
@@ -68,7 +68,7 @@ export default function Contact() {
         <div className="flex flex-wrap items-center gap-4 mt-1">
           <button
             type="submit"
-            className="rounded-full border-2 border-line px-6 py-2.5 font-sans text-[17px] font-medium text-item hover:bg-well transition-colors"
+            className="rounded-md bg-accent px-6 py-2.5 font-sans text-[15px] font-semibold text-accentink hover:opacity-90 transition-opacity"
           >
             Send
           </button>
