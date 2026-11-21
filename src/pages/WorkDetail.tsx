@@ -26,7 +26,7 @@ export default function WorkDetail() {
       </div>
 
       <figure className="mt-12">
-        <div className="overflow-hidden rounded-xl bg-card ring-1 ring-[color:var(--line)]">
+        <div className="overflow-hidden rounded-lg bg-card border border-line">
           {cover ? (
             <img src={asset(cover.src)} alt={cover.caption} className="w-full h-auto" />
           ) : (
@@ -64,7 +64,7 @@ export default function WorkDetail() {
 
       {more.map((img) => (
         <figure key={img.src} className="mt-12">
-          <div className="overflow-hidden rounded-xl bg-card ring-1 ring-[color:var(--line)]">
+          <div className="overflow-hidden rounded-lg bg-card border border-line">
             <img src={asset(img.src)} alt={img.caption} loading="lazy" className="w-full h-auto" />
           </div>
           <Caption>{img.caption}</Caption>
@@ -77,7 +77,7 @@ export default function WorkDetail() {
 
       {others.length > 0 && (
         <div className="mt-16">
-          <Carousel title={sameCategory.length ? `More from ${project.category}` : "More work"}>
+          <Carousel title={sameCategory.length ? `Other ${project.category.toLowerCase()} projects` : "Other projects"}>
             {others.map((p) => (
               <WorkCard key={p.slug} project={p} showCategory={!sameCategory.length} />
             ))}

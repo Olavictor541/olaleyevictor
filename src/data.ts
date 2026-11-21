@@ -28,7 +28,7 @@ export type Project = {
   slug: string;
   title: string;
   category: "Software" | "Web";
-  date: string; // YYYY-MM, used for ordering and "Updated" text
+  date: string; // YYYY-MM, used for ordering
   year: string;
   role: string;
   /** Short line shown under the title on the detail page */
@@ -117,33 +117,6 @@ export const projects: Project[] = [
     stack: ["C++17", "Data structures", "Algorithms", "Make"],
     links: [{ label: "Code", href: "https://github.com/Olavictor541/cpp_practice" }],
     tint: "oklch(0.88 0.04 150)",
-  },
-  {
-    slug: "portfolio",
-    title: "This website",
-    category: "Web",
-    date: "2026-11",
-    year: "2026",
-    role: "Design & development",
-    tagline: "My corner of the web",
-    images: [
-      { src: "work/portfolio.webp", caption: "The home page in light mode" },
-      { src: "work/portfolio-dark.webp", caption: "And in dark mode" },
-    ],
-    body: [
-      "I designed and built this site to keep my posts, projects and art in one place. It's a React and TypeScript app built with Vite and styled with Tailwind CSS.",
-      "Posts are plain Markdown files, so writing up a LeetCode problem or a project is as simple as adding a file. It has light and dark themes, works on phones, and deploys to GitHub Pages automatically whenever I push.",
-    ],
-    highlights: [
-      "Markdown-powered posts with syntax-highlighted code",
-      "Light and dark themes that follow your system setting",
-      "Automatic deploys with GitHub Actions",
-    ],
-    stack: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-    links: [
-      { label: "Code", href: "https://github.com/Olavictor541/olaleyevictor" },
-    ],
-    tint: "oklch(0.9 0.04 70)",
   },
   {
     slug: "secure-auth-dashboard",

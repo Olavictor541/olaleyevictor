@@ -32,7 +32,7 @@ export function AgeCounter({ birthDate }: { birthDate: string }) {
   }, [birthDate]);
 
   return (
-    <span className="font-mono text-[16px] font-medium tabular-nums text-title" title={`Born ${birth.toDateString()}`}>
+    <span className="font-mono text-[15px] font-medium tabular-nums text-accent bg-[color:var(--well)] rounded px-1.5 py-0.5" title="Counting live, one tick at a time">
       {age.toFixed(9)}
     </span>
   );
